@@ -11,7 +11,7 @@ import ProLayout, {
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
-import { Link, useIntl, connect, Dispatch } from 'umi'; // import { GithubOutlined } from '@ant-design/icons';
+import { Link, connect, Dispatch } from 'umi'; // import { GithubOutlined } from '@ant-design/icons';
 
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
@@ -59,7 +59,7 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright="2019 NK Engineering"
+    copyright="2020 NK Engineering"
     links={
       [
         // {
@@ -121,7 +121,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
     authority: undefined,
   };
-  const {} = useIntl();
   return (
     <>
       <ProLayout

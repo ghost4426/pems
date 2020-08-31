@@ -79,13 +79,13 @@ export default defineConfig({
           routes: [
             {
               path: '/home',
-              name: 'home',
+              name: 'Home',
               icon: 'home',
               component: './Home',
             },
             {
               path: '/dashboard',
-              name: 'dashboard',
+              name: 'Dashboard',
               icon: 'dashboard',
               component: './dashboard',
             },
@@ -114,18 +114,18 @@ export default defineConfig({
               component: './Blank',
             },
             {
-              name: 'account',
+              name: 'Account',
               icon: 'user',
               path: '/account',
               routes: [
                 {
-                  name: 'center',
+                  name: 'Profile',
                   icon: 'smile',
                   path: '/account/center',
                   component: './account/center',
                 },
                 {
-                  name: 'settings',
+                  name: 'Settings',
                   icon: 'smile',
                   path: '/account/settings',
                   component: './account/settings',

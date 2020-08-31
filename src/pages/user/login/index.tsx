@@ -1,9 +1,8 @@
 import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
-import { Dispatch, AnyAction,  connect } from 'umi';
+import { Dispatch, AnyAction, connect, history } from 'umi';
 import { StateType } from './model';
 import styles from './style.less';
-import { LoginParamsType } from './service';
 import LoginFrom from './components/Login';
 
 const { Tab, UserName, Password, Submit } = LoginFrom;
@@ -32,15 +31,8 @@ const Login: React.FC<LoginProps> = (props) => {
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState<string>('account');
 
-  const handleSubmit = (values: LoginParamsType) => {
-    const { dispatch } = props;
-    dispatch({
-      type: 'userAndlogin/login',
-      payload: {
-        ...values,
-        type,
-      },
-    });
+  const handleSubmit = () => {
+    history.push('/');
   };
   return (
     <div className={styles.main}>

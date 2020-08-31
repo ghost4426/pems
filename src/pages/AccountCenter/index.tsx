@@ -4,11 +4,9 @@ import React, { Component, useState, useRef } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { Link, connect, Dispatch } from 'umi';
 import { RouteChildrenProps } from 'react-router';
-import { ModalState } from './model';
 import Projects from './components/Projects';
 import Articles from './components/Articles';
 import Applications from './components/Applications';
-import { CurrentUser, TagType } from './data.d';
 import styles from './Center.less';
 
 const operationTabList = [
@@ -102,28 +100,7 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
   );
 };
 
-class AccountCenter extends Component<
-  AccountCenterProps,
-  AccountCenterState
-> {
-  // static getDerivedStateFromProps(
-  //   props: accountCenterProps,
-  //   state: accountCenterState,
-  // ) {
-  //   const { match, location } = props;
-  //   const { tabKey } = state;
-  //   const path = match && match.path;
-
-  //   const urlTabKey = location.pathname.replace(`${path}/`, '');
-  //   if (urlTabKey && urlTabKey !== '/' && tabKey !== urlTabKey) {
-  //     return {
-  //       tabKey: urlTabKey,
-  //     };
-  //   }
-
-  //   return null;
-  // }
-
+class AccountCenter extends Component<AccountCenterProps, AccountCenterState> {
   state: AccountCenterState = {
     tabKey: 'articles',
   };
@@ -202,40 +179,90 @@ class AccountCenter extends Component<
 
   render() {
     const { tabKey } = this.state;
-    const { currentUser = {}, currentUserLoading } = this.props;
-    const dataLoading = currentUserLoading || !(currentUser && Object.keys(currentUser).length);
+    const {
+      currentUser = {
+        name: 'Serati Ma',
+        avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+        userid: '00000001',
+        email: 'antdesign@alipay.com',
+        signature: '海纳百川，有容乃大',
+        title: '交互专家',
+        group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+        tags: [
+          {
+            key: '0',
+            label: '很有想法的',
+          },
+          {
+            key: '1',
+            label: '专注设计',
+          },
+          {
+            key: '2',
+            label: '辣~',
+          },
+          {
+            key: '3',
+            label: '大长腿',
+          },
+          {
+            key: '4',
+            label: '川妹子',
+          },
+          {
+            key: '5',
+            label: '海纳百川',
+          },
+        ],
+        notifyCount: 12,
+        unreadCount: 11,
+        country: 'China',
+        geographic: {
+          province: {
+            label: '浙江省',
+            key: '330000',
+          },
+          city: {
+            label: '杭州市',
+            key: '330100',
+          },
+        },
+        address: '西湖区工专路 77 号',
+        phone: '0752-268888888',
+      },
+    } = this.props;
     return (
       <GridContent>
         <Row gutter={24}>
           <Col lg={7} md={24}>
-            <Card bordered={false} style={{ marginBottom: 24 }} loading={dataLoading}>
-              {!dataLoading && (
-                <div>
-                  <div className={styles.avatarHolder}>
-                    <img alt="" src={currentUser.avatar} />
-                    <div className={styles.name}>{currentUser.name}</div>
-                    <div>{currentUser.signature}</div>
-                  </div>
-                  {this.renderUserInfo(currentUser)}
-                  <Divider dashed />
-                  <TagList tags={currentUser.tags || []} />
-                  <Divider style={{ marginTop: 16 }} dashed />
-                  <div className={styles.team}>
-                    <div className={styles.teamTitle}>团队</div>
-                    <Row gutter={36}>
-                      {currentUser.notice &&
-                        currentUser.notice.map((item) => (
-                          <Col key={item.id} lg={24} xl={12}>
-                            <Link to={item.href}>
-                              <Avatar size="small" src={item.logo} />
-                              {item.member}
-                            </Link>
-                          </Col>
-                        ))}
-                    </Row>
-                  </div>
+            <Card bordered={false} style={{ marginBottom: 24 }}>
+              (
+              <div>
+                <div className={styles.avatarHolder}>
+                  <img alt="" src={currentUser.avatar} />
+                  <div className={styles.name}>{currentUser.name}</div>
+                  <div>{currentUser.signature}</div>
                 </div>
-              )}
+                {this.renderUserInfo(currentUser)}
+                <Divider dashed />
+                <TagList tags={currentUser.tags || []} />
+                <Divider style={{ marginTop: 16 }} dashed />
+                <div className={styles.team}>
+                  <div className={styles.teamTitle}>团队</div>
+                  <Row gutter={36}>
+                    {currentUser.notice &&
+                      currentUser.notice.map((item) => (
+                        <Col key={item.id} lg={24} xl={12}>
+                          <Link to={item.href}>
+                            <Avatar size="small" src={item.logo} />
+                            {item.member}
+                          </Link>
+                        </Col>
+                      ))}
+                  </Row>
+                </div>
+              </div>
+              )
             </Card>
           </Col>
           <Col lg={17} md={24}>
@@ -255,15 +282,4 @@ class AccountCenter extends Component<
   }
 }
 
-export default connect(
-  ({
-    loading,
-    accountCenter,
-  }: {
-    loading: { effects: { [key: string]: boolean } };
-    accountCenter: ModalState;
-  }) => ({
-    currentUser: accountCenter.currentUser,
-    currentUserLoading: loading.effects['accountCenter/fetchCurrent'],
-  }),
-)(AccountCenter);
+export default connect()(AccountCenter);

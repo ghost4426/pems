@@ -1,8 +1,8 @@
 import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
-import { Avatar, Card, Col, Divider, Input, Row, Tag } from 'antd';
+import { Card, Col, Divider, Input, Row, Tag } from 'antd';
 import React, { Component, useState, useRef } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
-import { Link, connect, Dispatch } from 'umi';
+import { connect, Dispatch } from 'umi';
 import { RouteChildrenProps } from 'react-router';
 import { ModalState } from './model';
 import Projects from './components/Projects';
@@ -16,7 +16,7 @@ const operationTabList = [
     key: 'articles',
     tab: (
       <span>
-        文章 <span style={{ fontSize: 14 }}>(8)</span>
+        Articles <span style={{ fontSize: 14 }}>(0)</span>
       </span>
     ),
   },
@@ -24,7 +24,7 @@ const operationTabList = [
     key: 'applications',
     tab: (
       <span>
-        应用 <span style={{ fontSize: 14 }}>(8)</span>
+        Applications <span style={{ fontSize: 14 }}>(0)</span>
       </span>
     ),
   },
@@ -32,7 +32,7 @@ const operationTabList = [
     key: 'projects',
     tab: (
       <span>
-        项目 <span style={{ fontSize: 14 }}>(8)</span>
+        Projects <span style={{ fontSize: 14 }}>(0)</span>
       </span>
     ),
   },
@@ -40,7 +40,6 @@ const operationTabList = [
 
 interface CenterProps extends RouteChildrenProps {
   dispatch: Dispatch<any>;
-  currentUser: Partial<CurrentUser>;
   currentUserLoading: boolean;
 }
 interface CenterState {
@@ -77,7 +76,7 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
 
   return (
     <div className={styles.tags}>
-      <div className={styles.tagsTitle}>标签</div>
+      <div className={styles.tagsTitle}>Tag</div>
       {(tags || []).concat(newTags).map((item) => (
         <Tag key={item.key}>{item.label}</Tag>
       ))}
@@ -199,40 +198,31 @@ class Center extends Component<CenterProps, CenterState> {
 
   render() {
     const { tabKey } = this.state;
-    const { currentUser = {}, currentUserLoading } = this.props;
-    const dataLoading = currentUserLoading || !(currentUser && Object.keys(currentUser).length);
+    const currentUser = {
+      name: 'Tuan Pham',
+      avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+      userid: '00000001',
+      email: 'abc@mail.com',
+      signature: '',
+      title: '',
+      group: '',
+    };
     return (
       <GridContent>
         <Row gutter={24}>
           <Col lg={7} md={24}>
-            <Card bordered={false} style={{ marginBottom: 24 }} loading={dataLoading}>
-              {!dataLoading && (
-                <div>
-                  <div className={styles.avatarHolder}>
-                    <img alt="" src={currentUser.avatar} />
-                    <div className={styles.name}>{currentUser.name}</div>
-                    <div>{currentUser.signature}</div>
-                  </div>
-                  {this.renderUserInfo(currentUser)}
-                  <Divider dashed />
-                  <TagList tags={currentUser.tags || []} />
-                  <Divider style={{ marginTop: 16 }} dashed />
-                  <div className={styles.team}>
-                    <div className={styles.teamTitle}>团队</div>
-                    <Row gutter={36}>
-                      {currentUser.notice &&
-                        currentUser.notice.map((item) => (
-                          <Col key={item.id} lg={24} xl={12}>
-                            <Link to={item.href}>
-                              <Avatar size="small" src={item.logo} />
-                              {item.member}
-                            </Link>
-                          </Col>
-                        ))}
-                    </Row>
-                  </div>
+            <Card bordered={false} style={{ marginBottom: 24 }} loading={false}>
+              <div>
+                <div className={styles.avatarHolder}>
+                  <img alt="" src={currentUser.avatar} />
+                  <div className={styles.name}>{currentUser.name}</div>
+                  <div>{currentUser.signature}</div>
                 </div>
-              )}
+                {this.renderUserInfo(currentUser)}
+                <Divider dashed />
+                <TagList tags={currentUser.tags || []} />
+                <Divider style={{ marginTop: 16 }} dashed />
+              </div>
             </Card>
           </Col>
           <Col lg={17} md={24}>
