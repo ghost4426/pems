@@ -1,86 +1,46 @@
 import { FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
-
 import { List } from 'antd';
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
-
 const passwordStrength = {
-  strong: (
-    <span className="strong">
-      <FormattedMessage id="accountandsettings.security.strong" defaultMessage="Strong" />
-    </span>
-  ),
-  medium: (
-    <span className="medium">
-      <FormattedMessage id="accountandsettings.security.medium" defaultMessage="Medium" />
-    </span>
-  ),
-  weak: (
-    <span className="weak">
-      <FormattedMessage id="accountandsettings.security.weak" defaultMessage="Weak" />
-      Weak
-    </span>
-  ),
+  strong: <span className="strong">Strong</span>,
+  medium: <span className="medium">Medium</span>,
+  weak: <span className="weak">Weak Weak</span>,
 };
 
 class SecurityView extends Component {
   getData = () => [
     {
-      title: formatMessage({ id: 'accountandsettings.security.password' }, {}),
+      title: 'Account Password',
       description: (
         <>
-          {formatMessage({ id: 'accountandsettings.security.password-description' })}：
+          'Current password strength：'：
           {passwordStrength.strong}
         </>
       ),
-      actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
-        </a>,
-      ],
+      actions: [<a key="Modify">Modify</a>],
     },
     {
-      title: formatMessage({ id: 'accountandsettings.security.phone' }, {}),
-      description: `${formatMessage(
-        { id: 'accountandsettings.security.phone-description' },
-        {},
-      )}：138****8293`,
-      actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
-        </a>,
-      ],
+      title: 'Security Phone',
+      description: `${'Bound phone：'}：138****8293`,
+      actions: [<a key="Modify">Modify</a>],
     },
     {
-      title: formatMessage({ id: 'accountandsettings.security.question' }, {}),
-      description: formatMessage({ id: 'accountandsettings.security.question-description' }, {}),
-      actions: [
-        <a key="Set">
-          <FormattedMessage id="accountandsettings.security.set" defaultMessage="Set" />
-        </a>,
-      ],
+      title: 'Security Question',
+      description:
+        'The security question is not set, and the security policy can effectively protect the account security',
+      actions: [<a key="Set">Set</a>],
     },
     {
-      title: formatMessage({ id: 'accountandsettings.security.email' }, {}),
-      description: `${formatMessage(
-        { id: 'accountandsettings.security.email-description' },
-        {},
-      )}：ant***sign.com`,
-      actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
-        </a>,
-      ],
+      title: 'Backup Email',
+      description: `${'Bound Email：'}：ant***sign.com`,
+      actions: [<a key="Modify">Modify</a>],
     },
     {
-      title: formatMessage({ id: 'accountandsettings.security.mfa' }, {}),
-      description: formatMessage({ id: 'accountandsettings.security.mfa-description' }, {}),
-      actions: [
-        <a key="bind">
-          <FormattedMessage id="accountandsettings.security.bind" defaultMessage="Bind" />
-        </a>,
-      ],
+      title: 'MFA Device',
+      description: 'Unbound MFA device, after binding, can be confirmed twice',
+      actions: [<a key="bind">Bind</a>],
     },
   ];
 

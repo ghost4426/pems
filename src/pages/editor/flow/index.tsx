@@ -1,6 +1,5 @@
 import { Col, Row } from 'antd';
 import GGEditor, { Flow } from 'gg-editor';
-
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import React from 'react';
 import { formatMessage } from 'umi';
@@ -12,14 +11,8 @@ import { FlowToolbar } from './components/EditorToolbar';
 import styles from './index.less';
 
 GGEditor.setTrackable(false);
-
 export default () => (
-  <PageHeaderWrapper
-    content={formatMessage({
-      id: 'editorandflow.description',
-      defaultMessage: '',
-    })}
-  >
+  <PageHeaderWrapper content="The flow chart is an excellent way to represent the idea of the algorithm">
     <GGEditor className={styles.editor}>
       <Row className={styles.editorHd}>
         <Col span={24}>

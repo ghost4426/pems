@@ -1,6 +1,5 @@
 import { Col, Row } from 'antd';
 import GGEditor, { Koni } from 'gg-editor';
-
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import React from 'react';
 import { formatMessage } from 'umi';
@@ -12,14 +11,8 @@ import { KoniToolbar } from './components/EditorToolbar';
 import styles from './index.less';
 
 GGEditor.setTrackable(false);
-
 export default () => (
-  <PageHeaderWrapper
-    content={formatMessage({
-      id: 'editorandkoni.description',
-      defaultMessage: 'description',
-    })}
-  >
+  <PageHeaderWrapper content="The topology diagram refers to the network structure diagram composed of network node devices and communication media">
     <GGEditor className={styles.editor}>
       <Row className={styles.editorHd}>
         <Col span={24}>

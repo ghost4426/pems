@@ -6,33 +6,21 @@ import React, { Component, Fragment } from 'react';
 class BindingView extends Component {
   getData = () => [
     {
-      title: formatMessage({ id: 'accountandsettings.binding.taobao' }, {}),
-      description: formatMessage({ id: 'accountandsettings.binding.taobao-description' }, {}),
-      actions: [
-        <a key="Bind">
-          <FormattedMessage id="accountandsettings.binding.bind" defaultMessage="Bind" />
-        </a>,
-      ],
+      title: 'Binding Taobao',
+      description: 'Currently unbound Taobao account',
+      actions: [<a key="Bind">Bind</a>],
       avatar: <TaobaoOutlined className="taobao" />,
     },
     {
-      title: formatMessage({ id: 'accountandsettings.binding.alipay' }, {}),
-      description: formatMessage({ id: 'accountandsettings.binding.alipay-description' }, {}),
-      actions: [
-        <a key="Bind">
-          <FormattedMessage id="accountandsettings.binding.bind" defaultMessage="Bind" />
-        </a>,
-      ],
+      title: 'Binding Alipay',
+      description: 'Currently unbound Alipay account',
+      actions: [<a key="Bind">Bind</a>],
       avatar: <AlipayOutlined className="alipay" />,
     },
     {
-      title: formatMessage({ id: 'accountandsettings.binding.dingding' }, {}),
-      description: formatMessage({ id: 'accountandsettings.binding.dingding-description' }, {}),
-      actions: [
-        <a key="Bind">
-          <FormattedMessage id="accountandsettings.binding.bind" defaultMessage="Bind" />
-        </a>,
-      ],
+      title: 'Binding DingTalk',
+      description: 'Currently unbound DingTalk account',
+      actions: [<a key="Bind">Bind</a>],
       avatar: <DingdingOutlined className="dingding" />,
     },
   ];

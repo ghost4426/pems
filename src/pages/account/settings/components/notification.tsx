@@ -1,39 +1,26 @@
 import { List, Switch } from 'antd';
 import React, { Component, Fragment } from 'react';
-
 import { formatMessage } from 'umi';
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 
 class NotificationView extends Component {
   getData = () => {
-    const Action = (
-      <Switch
-        checkedChildren={formatMessage({ id: 'accountandsettings.settings.open' })}
-        unCheckedChildren={formatMessage({ id: 'accountandsettings.settings.close' })}
-        defaultChecked
-      />
-    );
+    const Action = <Switch checkedChildren="Open" unCheckedChildren="Close" defaultChecked />;
     return [
       {
-        title: formatMessage({ id: 'accountandsettings.notification.password' }, {}),
-        description: formatMessage(
-          { id: 'accountandsettings.notification.password-description' },
-          {},
-        ),
+        title: 'Account Password',
+        description: 'Messages from other users will be notified in the form of a station letter',
         actions: [Action],
       },
       {
-        title: formatMessage({ id: 'accountandsettings.notification.messages' }, {}),
-        description: formatMessage(
-          { id: 'accountandsettings.notification.messages-description' },
-          {},
-        ),
+        title: 'System Messages',
+        description: 'System messages will be notified in the form of a station letter',
         actions: [Action],
       },
       {
-        title: formatMessage({ id: 'accountandsettings.notification.todo' }, {}),
-        description: formatMessage({ id: 'accountandsettings.notification.todo-description' }, {}),
+        title: 'To-do Notification',
+        description: 'The to-do list will be notified in the form of a letter from the station',
         actions: [Action],
       },
     ];

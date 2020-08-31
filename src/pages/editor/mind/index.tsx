@@ -1,6 +1,5 @@
 import { Col, Row } from 'antd';
 import GGEditor, { Mind } from 'gg-editor';
-
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import React from 'react';
 import { formatMessage } from 'umi';
@@ -12,14 +11,8 @@ import data from './worldCup2018.json';
 import styles from './index.less';
 
 GGEditor.setTrackable(false);
-
 export default () => (
-  <PageHeaderWrapper
-    content={formatMessage({
-      id: 'editorandmind.description',
-      defaultMessage: 'description',
-    })}
-  >
+  <PageHeaderWrapper content="The brain map is an effective graphical thinking tool for expressing divergent thinking. It is simple but effective and is a practical thinking tool">
     <GGEditor className={styles.editor}>
       <Row className={styles.editorHd}>
         <Col span={24}>

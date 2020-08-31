@@ -9,7 +9,6 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
-
 interface BasicFormProps {
   submitting: boolean;
   dispatch: Dispatch<any>;
@@ -21,20 +20,35 @@ const BasicForm: FC<BasicFormProps> = (props) => {
   const [showPublicUsers, setShowPublicUsers] = React.useState(false);
   const formItemLayout = {
     labelCol: {
-      xs: { span: 24 },
-      sm: { span: 7 },
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 7,
+      },
     },
     wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 12 },
-      md: { span: 10 },
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 12,
+      },
+      md: {
+        span: 10,
+      },
     },
   };
-
   const submitFormLayout = {
     wrapperCol: {
-      xs: { span: 24, offset: 0 },
-      sm: { span: 10, offset: 7 },
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 10,
+        offset: 7,
+      },
     },
   };
 
@@ -56,81 +70,88 @@ const BasicForm: FC<BasicFormProps> = (props) => {
   };
 
   return (
-    <PageHeaderWrapper content={<FormattedMessage id="formandbasic-form.basic.description" />}>
+    <PageHeaderWrapper content="Form pages are used to collect or verify information to users, and basic forms are common in scenarios where there are fewer data items.">
       <Card bordered={false}>
         <Form
           hideRequiredMark
-          style={{ marginTop: 8 }}
+          style={{
+            marginTop: 8,
+          }}
           form={form}
           name="basic"
-          initialValues={{ public: '1' }}
+          initialValues={{
+            public: '1',
+          }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           onValuesChange={onValuesChange}
         >
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.title.label" />}
+            label="Title"
             name="title"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'formandbasic-form.title.required' }),
+                message: 'Please enter a title',
               },
             ]}
           >
-            <Input placeholder={formatMessage({ id: 'formandbasic-form.title.placeholder' })} />
+            <Input placeholder="Give the target a name" />
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.date.label" />}
+            label="Start and end date"
             name="date"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'formandbasic-form.date.required' }),
+                message: 'Please select the start and end date',
               },
             ]}
           >
             <RangePicker
-              style={{ width: '100%' }}
-              placeholder={[
-                formatMessage({ id: 'formandbasic-form.placeholder.start' }),
-                formatMessage({ id: 'formandbasic-form.placeholder.end' }),
-              ]}
+              style={{
+                width: '100%',
+              }}
+              placeholder={['Start date', 'End date']}
             />
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.goal.label" />}
+            label="Goal description"
             name="goal"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'formandbasic-form.goal.required' }),
+                message: 'Please enter a description of the goal',
               },
             ]}
           >
             <TextArea
-              style={{ minHeight: 32 }}
-              placeholder={formatMessage({ id: 'formandbasic-form.goal.placeholder' })}
+              style={{
+                minHeight: 32,
+              }}
+              placeholder="Please enter your work goals"
               rows={4}
             />
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.standard.label" />}
+            label="Metrics"
             name="standard"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'formandbasic-form.standard.required' }),
+                message: 'Please enter a metric',
               },
             ]}
           >
             <TextArea
-              style={{ minHeight: 32 }}
-              placeholder={formatMessage({ id: 'formandbasic-form.standard.placeholder' })}
+              style={{
+                minHeight: 32,
+              }}
+              placeholder="Please enter a metric"
               rows={4}
             />
           </FormItem>
@@ -138,98 +159,96 @@ const BasicForm: FC<BasicFormProps> = (props) => {
             {...formItemLayout}
             label={
               <span>
-                <FormattedMessage id="formandbasic-form.client.label" />
+                Client
                 <em className={styles.optional}>
-                  <FormattedMessage id="formandbasic-form.form.optional" />
-                  <Tooltip title={<FormattedMessage id="formandbasic-form.label.tooltip" />}>
-                    <InfoCircleOutlined style={{ marginRight: 4 }} />
+                  (optional)
+                  <Tooltip title="Target service object">
+                    <InfoCircleOutlined
+                      style={{
+                        marginRight: 4,
+                      }}
+                    />
                   </Tooltip>
                 </em>
               </span>
             }
             name="client"
           >
-            <Input placeholder={formatMessage({ id: 'formandbasic-form.client.placeholder' })} />
+            <Input placeholder="Please describe your customer service, internal customers directly @ Name / job number" />
           </FormItem>
           <FormItem
             {...formItemLayout}
             label={
               <span>
-                <FormattedMessage id="formandbasic-form.invites.label" />
-                <em className={styles.optional}>
-                  <FormattedMessage id="formandbasic-form.form.optional" />
-                </em>
+                Inviting critics
+                <em className={styles.optional}>(optional)</em>
               </span>
             }
             name="invites"
           >
-            <Input placeholder={formatMessage({ id: 'formandbasic-form.invites.placeholder' })} />
+            <Input placeholder="Please direct @ Name / job number, you can invite up to 5 people" />
           </FormItem>
           <FormItem
             {...formItemLayout}
             label={
               <span>
-                <FormattedMessage id="formandbasic-form.weight.label" />
-                <em className={styles.optional}>
-                  <FormattedMessage id="formandbasic-form.form.optional" />
-                </em>
+                Weight
+                <em className={styles.optional}>(optional)</em>
               </span>
             }
             name="weight"
           >
-            <InputNumber
-              placeholder={formatMessage({ id: 'formandbasic-form.weight.placeholder' })}
-              min={0}
-              max={100}
-            />
+            <InputNumber placeholder="Please enter weight" min={0} max={100} />
             <span className="ant-form-text">%</span>
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label={<FormattedMessage id="formandbasic-form.public.label" />}
-            help={<FormattedMessage id="formandbasic-form.label.help" />}
+            label="Target disclosure"
+            help="Customers and invitees are shared by default"
             name="publicType"
           >
             <div>
               <Radio.Group>
-                <Radio value="1">
-                  <FormattedMessage id="formandbasic-form.radio.public" />
-                </Radio>
-                <Radio value="2">
-                  <FormattedMessage id="formandbasic-form.radio.partially-public" />
-                </Radio>
-                <Radio value="3">
-                  <FormattedMessage id="formandbasic-form.radio.private" />
-                </Radio>
+                <Radio value="1">Public</Radio>
+                <Radio value="2">Partially public</Radio>
+                <Radio value="3">Private</Radio>
               </Radio.Group>
-              <FormItem style={{ marginBottom: 0 }} name="publicUsers">
+              <FormItem
+                style={{
+                  marginBottom: 0,
+                }}
+                name="publicUsers"
+              >
                 <Select
                   mode="multiple"
-                  placeholder={formatMessage({ id: 'formandbasic-form.publicUsers.placeholder' })}
+                  placeholder="Open to"
                   style={{
                     margin: '8px 0',
                     display: showPublicUsers ? 'block' : 'none',
                   }}
                 >
-                  <Option value="1">
-                    <FormattedMessage id="formandbasic-form.option.A" />
-                  </Option>
-                  <Option value="2">
-                    <FormattedMessage id="formandbasic-form.option.B" />
-                  </Option>
-                  <Option value="3">
-                    <FormattedMessage id="formandbasic-form.option.C" />
-                  </Option>
+                  <Option value="1">Colleague A</Option>
+                  <Option value="2">Colleague B</Option>
+                  <Option value="3">Colleague C</Option>
                 </Select>
               </FormItem>
             </div>
           </FormItem>
-          <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
+          <FormItem
+            {...submitFormLayout}
+            style={{
+              marginTop: 32,
+            }}
+          >
             <Button type="primary" htmlType="submit" loading={submitting}>
-              <FormattedMessage id="formandbasic-form.form.submit" />
+              Submit
             </Button>
-            <Button style={{ marginLeft: 8 }}>
-              <FormattedMessage id="formandbasic-form.form.save" />
+            <Button
+              style={{
+                marginLeft: 8,
+              }}
+            >
+              Save
             </Button>
           </FormItem>
         </Form>

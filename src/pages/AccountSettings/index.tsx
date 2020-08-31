@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { FormattedMessage, Dispatch, connect } from 'umi';
 import { GridContent } from '@ant-design/pro-layout';
 import { Menu } from 'antd';
@@ -11,12 +10,10 @@ import SecurityView from './components/security';
 import styles from './style.less';
 
 const { Item } = Menu;
-
 interface AccountSettingsProps {
   dispatch: Dispatch;
   currentUser: CurrentUser;
 }
-
 type AccountSettingsStateKeys = 'base' | 'security' | 'binding' | 'notification';
 interface AccountSettingsState {
   mode: 'inline' | 'horizontal';
@@ -26,28 +23,16 @@ interface AccountSettingsState {
   selectKey: AccountSettingsStateKeys;
 }
 
-class AccountSettings extends Component<
-  AccountSettingsProps,
-  AccountSettingsState
-> {
+class AccountSettings extends Component<AccountSettingsProps, AccountSettingsState> {
   main: HTMLDivElement | undefined = undefined;
 
   constructor(props: AccountSettingsProps) {
     super(props);
     const menuMap = {
-      base: <FormattedMessage id="accountsettings.menuMap.basic" defaultMessage="Basic Settings" />,
-      security: (
-        <FormattedMessage id="accountsettings.menuMap.security" defaultMessage="Security Settings" />
-      ),
-      binding: (
-        <FormattedMessage id="accountsettings.menuMap.binding" defaultMessage="Account Binding" />
-      ),
-      notification: (
-        <FormattedMessage
-          id="accountsettings.menuMap.notification"
-          defaultMessage="New Message Notification"
-        />
-      ),
+      base: 'Basic Settings',
+      security: 'Security Settings',
+      binding: 'Account Binding',
+      notification: 'New Message Notification',
     };
     this.state = {
       mode: 'inline',
@@ -89,18 +74,23 @@ class AccountSettings extends Component<
     if (!this.main) {
       return;
     }
+
     requestAnimationFrame(() => {
       if (!this.main) {
         return;
       }
+
       let mode: 'inline' | 'horizontal' = 'inline';
       const { offsetWidth } = this.main;
+
       if (this.main.offsetWidth < 641 && offsetWidth > 400) {
         mode = 'horizontal';
       }
+
       if (window.innerWidth < 768 && offsetWidth > 400) {
         mode = 'horizontal';
       }
+
       this.setState({
         mode,
       });
@@ -109,15 +99,20 @@ class AccountSettings extends Component<
 
   renderChildren = () => {
     const { selectKey } = this.state;
+
     switch (selectKey) {
       case 'base':
         return <BaseView />;
+
       case 'security':
         return <SecurityView />;
+
       case 'binding':
         return <BindingView />;
+
       case 'notification':
         return <NotificationView />;
+
       default:
         break;
     }
@@ -127,9 +122,11 @@ class AccountSettings extends Component<
 
   render() {
     const { currentUser } = this.props;
+
     if (!currentUser.userid) {
       return '';
     }
+
     const { mode, selectKey } = this.state;
     return (
       <GridContent>
@@ -161,7 +158,13 @@ class AccountSettings extends Component<
 }
 
 export default connect(
-  ({ accountSettings }: { accountSettings: { currentUser: CurrentUser } }) => ({
+  ({
+    accountSettings,
+  }: {
+    accountSettings: {
+      currentUser: CurrentUser;
+    };
+  }) => ({
     currentUser: accountSettings.currentUser,
   }),
 )(AccountSettings);

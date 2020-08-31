@@ -1,32 +1,17 @@
 import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
 import React, { FC, useState, useEffect } from 'react';
 import { Link, connect, history, FormattedMessage, formatMessage, Dispatch } from 'umi';
-
 import { StateType } from './model';
 import styles from './style.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const InputGroup = Input.Group;
-
 const passwordStatusMap = {
-  ok: (
-    <div className={styles.success}>
-      <FormattedMessage id="userandregister.strength.strong" />
-    </div>
-  ),
-  pass: (
-    <div className={styles.warning}>
-      <FormattedMessage id="userandregister.strength.medium" />
-    </div>
-  ),
-  poor: (
-    <div className={styles.error}>
-      <FormattedMessage id="userandregister.strength.short" />
-    </div>
-  ),
+  ok: <div className={styles.success}>Strength: strong</div>,
+  pass: <div className={styles.warning}>Strength: medium</div>,
+  poor: <div className={styles.error}>Strength: too short</div>,
 };
-
 const passwordProgressMap: {
   ok: 'success';
   pass: 'normal';
@@ -36,13 +21,11 @@ const passwordProgressMap: {
   pass: 'normal',
   poor: 'exception',
 };
-
 interface RegisterProps {
   dispatch: Dispatch;
   userAndregister: StateType;
   submitting: boolean;
 }
-
 export interface UserRegisterParams {
   mail: string;
   password: string;
@@ -64,7 +47,9 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
     if (!userAndregister) {
       return;
     }
+
     const account = form.getFieldValue('mail');
+
     if (userAndregister.status === 'ok') {
       message.success('注册成功！');
       history.push({
@@ -81,66 +66,80 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
     },
     [],
   );
+
   const onGetCaptcha = () => {
     let counts = 59;
     setCount(counts);
     interval = window.setInterval(() => {
       counts -= 1;
       setCount(counts);
+
       if (counts === 0) {
         clearInterval(interval);
       }
     }, 1000);
   };
+
   const getPasswordStatus = () => {
     const value = form.getFieldValue('password');
+
     if (value && value.length > 9) {
       return 'ok';
     }
+
     if (value && value.length > 5) {
       return 'pass';
     }
+
     return 'poor';
   };
+
   const onFinish = (values: { [key: string]: any }) => {
     dispatch({
       type: 'userAndregister/submit',
-      payload: {
-        ...values,
-        prefix,
-      },
+      payload: { ...values, prefix },
     });
   };
+
   const checkConfirm = (_: any, value: string) => {
     const promise = Promise;
+
     if (value && value !== form.getFieldValue('password')) {
-      return promise.reject(formatMessage({ id: 'userandregister.password.twice' }));
+      return promise.reject('The passwords entered twice do not match!');
     }
+
     return promise.resolve();
   };
+
   const checkPassword = (_: any, value: string) => {
-    const promise = Promise;
-    // 没有值的情况
+    const promise = Promise; // 没有值的情况
+
     if (!value) {
       setVisible(!!value);
-      return promise.reject(formatMessage({ id: 'userandregister.password.required' }));
-    }
-    // 有值的情况
+      return promise.reject('Please enter your password!');
+    } // 有值的情况
+
     if (!visible) {
       setVisible(!!value);
     }
+
     setPopover(!popover);
+
     if (value.length < 6) {
       return promise.reject('');
     }
+
     if (value && confirmDirty) {
       form.validateFields(['confirm']);
     }
+
     return promise.resolve();
   };
+
   const changePrefix = (value: string) => {
     setPrefix(value);
   };
+
   const renderPasswordProgress = () => {
     const value = form.getFieldValue('password');
     const passwordStatus = getPasswordStatus();
@@ -159,47 +158,53 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
 
   return (
     <div className={styles.main}>
-      <h3>
-        <FormattedMessage id="userandregister.register.register" />
-      </h3>
+      <h3>Register</h3>
       <Form form={form} name="UserRegister" onFinish={onFinish}>
         <FormItem
           name="mail"
           rules={[
             {
               required: true,
-              message: formatMessage({ id: 'userandregister.email.required' }),
+              message: 'Please enter your email!',
             },
             {
               type: 'email',
-              message: formatMessage({ id: 'userandregister.email.wrong-format' }),
+              message: 'The email address is in the wrong format!',
             },
           ]}
         >
-          <Input
-            size="large"
-            placeholder={formatMessage({ id: 'userandregister.email.placeholder' })}
-          />
+          <Input size="large" placeholder="Email" />
         </FormItem>
         <Popover
           getPopupContainer={(node) => {
             if (node && node.parentNode) {
               return node.parentNode as HTMLElement;
             }
+
             return node;
           }}
           content={
             visible && (
-              <div style={{ padding: '4px 0' }}>
+              <div
+                style={{
+                  padding: '4px 0',
+                }}
+              >
                 {passwordStatusMap[getPasswordStatus()]}
                 {renderPasswordProgress()}
-                <div style={{ marginTop: 10 }}>
-                  <FormattedMessage id="userandregister.strength.msg" />
+                <div
+                  style={{
+                    marginTop: 10,
+                  }}
+                >
+                  Please enter at least 6 characters and don't use passwords that are easy to guess.
                 </div>
               </div>
             )
           }
-          overlayStyle={{ width: 240 }}
+          overlayStyle={{
+            width: 240,
+          }}
           placement="right"
           visible={visible}
         >
@@ -216,11 +221,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
               },
             ]}
           >
-            <Input
-              size="large"
-              type="password"
-              placeholder={formatMessage({ id: 'userandregister.password.placeholder' })}
-            />
+            <Input size="large" type="password" placeholder="Password" />
           </FormItem>
         </Popover>
         <FormItem
@@ -228,42 +229,44 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
           rules={[
             {
               required: true,
-              message: formatMessage({ id: 'userandregister.confirm-password.required' }),
+              message: 'Please confirm your password!',
             },
             {
               validator: checkConfirm,
             },
           ]}
         >
-          <Input
-            size="large"
-            type="password"
-            placeholder={formatMessage({ id: 'userandregister.confirm-password.placeholder' })}
-          />
+          <Input size="large" type="password" placeholder="Confirm password" />
         </FormItem>
         <InputGroup compact>
-          <Select size="large" value={prefix} onChange={changePrefix} style={{ width: '20%' }}>
+          <Select
+            size="large"
+            value={prefix}
+            onChange={changePrefix}
+            style={{
+              width: '20%',
+            }}
+          >
             <Option value="86">+86</Option>
             <Option value="87">+87</Option>
           </Select>
           <FormItem
-            style={{ width: '80%' }}
+            style={{
+              width: '80%',
+            }}
             name="mobile"
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'userandregister.phone-number.required' }),
+                message: 'Please enter your phone number!',
               },
               {
                 pattern: /^\d{11}$/,
-                message: formatMessage({ id: 'userandregister.phone-number.wrong-format' }),
+                message: 'Malformed phone number!',
               },
             ]}
           >
-            <Input
-              size="large"
-              placeholder={formatMessage({ id: 'userandregister.phone-number.placeholder' })}
-            />
+            <Input size="large" placeholder="Phone number" />
           </FormItem>
         </InputGroup>
         <Row gutter={8}>
@@ -273,14 +276,11 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
               rules={[
                 {
                   required: true,
-                  message: formatMessage({ id: 'userandregister.verification-code.required' }),
+                  message: 'Please enter the verification code!',
                 },
               ]}
             >
-              <Input
-                size="large"
-                placeholder={formatMessage({ id: 'userandregister.verification-code.placeholder' })}
-              />
+              <Input size="large" placeholder="Verification code" />
             </FormItem>
           </Col>
           <Col span={8}>
@@ -290,9 +290,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
               className={styles.getCaptcha}
               onClick={onGetCaptcha}
             >
-              {count
-                ? `${count} s`
-                : formatMessage({ id: 'userandregister.register.get-verification-code' })}
+              {count ? `${count} s` : 'Get code'}
             </Button>
           </Col>
         </Row>
@@ -304,16 +302,17 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
             type="primary"
             htmlType="submit"
           >
-            <FormattedMessage id="userandregister.register.register" />
+            Register
           </Button>
           <Link className={styles.login} to="/user/login">
-            <FormattedMessage id="userandregister.register.sign-in" />
+            Already have an account?
           </Link>
         </FormItem>
       </Form>
     </div>
   );
 };
+
 export default connect(
   ({
     userAndregister,
