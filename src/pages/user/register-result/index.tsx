@@ -1,5 +1,5 @@
 import { Button, Result } from 'antd';
-import { FormattedMessage, formatMessage, Link } from 'umi';
+import { Link } from 'umi';
 import React from 'react';
 import { RouteChildrenProps } from 'react-router';
 import styles from './style.less';
@@ -17,7 +17,7 @@ const actions = (
   </div>
 );
 
-const RegisterResult: React.FC<RouteChildrenProps> = ({ location }) => (
+const RegisterResult: React.FC<RouteChildrenProps> = () => (
   <Result
     className={styles.registerResult}
     status="success"

@@ -1,6 +1,6 @@
 import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
 import React, { FC, useState, useEffect } from 'react';
-import { Link, connect, history, FormattedMessage, formatMessage, Dispatch } from 'umi';
+import { Link, connect, history, Dispatch } from 'umi';
 import { StateType } from './model';
 import styles from './style.less';
 
@@ -197,7 +197,9 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
                     marginTop: 10,
                   }}
                 >
-                  Please enter at least 6 characters and don't use passwords that are easy to guess.
+                  {
+                    "Please enter at least 6 characters and don't use passwords that are easy to guess."
+                  }
                 </div>
               </div>
             )

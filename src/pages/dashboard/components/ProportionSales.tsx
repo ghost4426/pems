@@ -1,5 +1,6 @@
 import { Card, Radio } from 'antd';
-import { FormattedMessage } from 'umi';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import {} from 'umi';
 import { RadioChangeEvent } from 'antd/es/radio';
 import React from 'react';
 import { VisitDataType } from '../data.d';

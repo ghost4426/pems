@@ -1,5 +1,4 @@
 import { Card, Col, DatePicker, Row, Tabs } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi';
 import { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import moment from 'moment';
 import React from 'react';

@@ -1,4 +1,3 @@
-import { FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
 import { List } from 'antd';
 
@@ -15,7 +14,7 @@ class SecurityView extends Component {
       title: 'Account Password',
       description: (
         <>
-          'Current password strength：'：
+          Current password strength:
           {passwordStrength.strong}
         </>
       ),

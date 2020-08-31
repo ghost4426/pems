@@ -8,8 +8,11 @@ const { winPath } = utils; // preview.pro.ant.design only do not use in your pro
 
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, REACT_APP_ENV, GA_KEY } = process.env;
 export default defineConfig({
+  history: { type: 'hash' },
   hash: true,
   antd: {},
+  base: '/dashboard/',
+  publicPath: '/dashboard/',
   analytics: GA_KEY
     ? {
         ga: GA_KEY,
@@ -20,7 +23,7 @@ export default defineConfig({
   },
   locale: {
     // default zh-CN
-    default: 'zh-CN',
+    default: 'en-US',
     // default true, when it is true, will use `navigator.language` overwrite default
     antd: true,
     baseNavigator: true,
@@ -163,7 +166,7 @@ export default defineConfig({
           resourcePath: string;
         },
         _: string,
-        localName: string
+        localName: string,
       ) => {
         if (
           context.resourcePath.includes('node_modules') ||

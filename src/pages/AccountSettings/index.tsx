@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage, Dispatch, connect } from 'umi';
+import { Dispatch, connect } from 'umi';
 import { GridContent } from '@ant-design/pro-layout';
 import { Menu } from 'antd';
 import BaseView from './components/base';
