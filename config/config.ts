@@ -90,13 +90,13 @@ export default defineConfig({
               path: '/analysis',
               name: 'Analysis',
               icon: 'barChart',
-              component: './Blank',
+              component: './Analysis',
             },
             {
               path: '/historian',
               name: 'Historian',
               icon: 'redo',
-              component: './Blank',
+              component: './Historian',
             },
             {
               path: '/report',
