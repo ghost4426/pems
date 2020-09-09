@@ -57,7 +57,7 @@ class ChartCard extends React.Component<ChartCardProps> {
           </div>
         </div>
         {children && (
-          <div className={styles.content} style={{ height: contentHeight || 'auto' }}>
+          <div  className={styles.content} style={{ height: contentHeight || 'auto'}}>
             <div className={contentHeight && styles.contentFixed}>{children}</div>
           </div>
         )}
@@ -87,7 +87,7 @@ class ChartCard extends React.Component<ChartCardProps> {
       ...rest
     } = this.props;
     return (
-      <Card loading={loading} bodyStyle={{ padding: '0px 24px 8px 24px' }} {...rest}>
+      <Card loading={loading} bodyStyle={{ padding: '0px 0px 0px 0px' }} {...rest}>
         {this.renderContent()}
       </Card>
     );

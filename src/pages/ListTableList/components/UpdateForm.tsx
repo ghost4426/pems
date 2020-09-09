@@ -1,211 +1,173 @@
-import React, { useState } from 'react';
-import { Form, Button, DatePicker, Input, Modal, Radio, Select, Steps } from 'antd';
+/* eslint-disable react/jsx-curly-brace-presence */
+import React from 'react';
+import { Modal, Form, Input, Button, Select, DatePicker, Switch } from 'antd';
+import moment from 'moment';
 
-import { TableListItem } from '../data.d';
 
-export interface FormValueType extends Partial<TableListItem> {
-  target?: string;
-  template?: string;
-  type?: string;
-  time?: string;
-  frequency?: string;
+interface CreateFormProps {
+  modalVisible: boolean;
+  onCancel: () => void;
 }
 
-export interface UpdateFormProps {
-  onCancel: (flag?: boolean, formVals?: FormValueType) => void;
-  onSubmit: (values: FormValueType) => void;
-  updateModalVisible: boolean;
-  values: Partial<TableListItem>;
-}
-const FormItem = Form.Item;
-const { Step } = Steps;
-const { TextArea } = Input;
-const { Option } = Select;
-const RadioGroup = Radio.Group;
 
-export interface UpdateFormState {
-  formVals: FormValueType;
-  currentStep: number;
-}
-
-const formLayout = {
-  labelCol: { span: 7 },
-  wrapperCol: { span: 13 },
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+};
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
 };
 
-const UpdateForm: React.FC<UpdateFormProps> = (props) => {
-  const [formVals, setFormVals] = useState<FormValueType>({
-    name: props.values.name,
-    desc: props.values.desc,
-    key: props.values.key,
-    target: '0',
-    template: '0',
-    type: '1',
-    time: '',
-    frequency: 'month',
-  });
+const prefixSelector = (
+  <Form.Item name="prefix" noStyle>
+    <Select style={{ width: 70 }}>
+      <Select.Option value="84">+84</Select.Option>
+      <Select.Option value="1">+1</Select.Option>
+    </Select>
+  </Form.Item>
+);
 
-  const [currentStep, setCurrentStep] = useState<number>(0);
+const UpdateForm: React.FC<CreateFormProps> = (props) => {
+  const { modalVisible, onCancel } = props;
 
   const [form] = Form.useForm();
 
-  const {
-    onSubmit: handleUpdate,
-    onCancel: handleUpdateModalVisible,
-    updateModalVisible,
-    values,
-  } = props;
-
-  const forward = () => setCurrentStep(currentStep + 1);
-
-  const backward = () => setCurrentStep(currentStep - 1);
-
-  const handleNext = async () => {
-    const fieldsValue = await form.validateFields();
-
-    setFormVals({ ...formVals, ...fieldsValue });
-
-    if (currentStep < 2) {
-      forward();
-    } else {
-      handleUpdate(formVals);
-    }
+  const onFinish = (values: any) => {
+    console.log('Received values of form: ', values);
   };
 
-  const renderContent = () => {
-    if (currentStep === 1) {
-      return (
-        <>
-          <FormItem name="target" label="监控对象">
-            <Select style={{ width: '100%' }}>
-              <Option value="0">表一</Option>
-              <Option value="1">表二</Option>
-            </Select>
-          </FormItem>
-          <FormItem name="template" label="规则模板">
-            <Select style={{ width: '100%' }}>
-              <Option value="0">规则模板一</Option>
-              <Option value="1">规则模板二</Option>
-            </Select>
-          </FormItem>
-          <FormItem name="type" label="规则类型">
-            <RadioGroup>
-              <Radio value="0">强</Radio>
-              <Radio value="1">弱</Radio>
-            </RadioGroup>
-          </FormItem>
-        </>
-      );
-    }
-    if (currentStep === 2) {
-      return (
-        <>
-          <FormItem
-            name="time"
-            label="开始时间"
-            rules={[{ required: true, message: '请选择开始时间！' }]}
-          >
-            <DatePicker
-              style={{ width: '100%' }}
-              showTime
-              format="YYYY-MM-DD HH:mm:ss"
-              placeholder="选择开始时间"
-            />
-          </FormItem>
-          <FormItem name="frequency" label="调度周期">
-            <Select style={{ width: '100%' }}>
-              <Option value="month">月</Option>
-              <Option value="week">周</Option>
-            </Select>
-          </FormItem>
-        </>
-      );
-    }
-    return (
-      <>
-        <FormItem
-          name="name"
-          label="规则名称"
-          rules={[{ required: true, message: '请输入规则名称！' }]}
-        >
-          <Input placeholder="请输入" />
-        </FormItem>
-        <FormItem
-          name="desc"
-          label="规则描述"
-          rules={[{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }]}
-        >
-          <TextArea rows={4} placeholder="请输入至少五个字符" />
-        </FormItem>
-      </>
-    );
-  };
-
-  const renderFooter = () => {
-    if (currentStep === 1) {
-      return (
-        <>
-          <Button style={{ float: 'left' }} onClick={backward}>
-            上一步
-          </Button>
-          <Button onClick={() => handleUpdateModalVisible(false, values)}>取消</Button>
-          <Button type="primary" onClick={() => handleNext()}>
-            下一步
-          </Button>
-        </>
-      );
-    }
-    if (currentStep === 2) {
-      return (
-        <>
-          <Button style={{ float: 'left' }} onClick={backward}>
-            上一步
-          </Button>
-          <Button onClick={() => handleUpdateModalVisible(false, values)}>取消</Button>
-          <Button type="primary" onClick={() => handleNext()}>
-            完成
-          </Button>
-        </>
-      );
-    }
-    return (
-      <>
-        <Button onClick={() => handleUpdateModalVisible(false, values)}>取消</Button>
-        <Button type="primary" onClick={() => handleNext()}>
-          下一步
-        </Button>
-      </>
-    );
-  };
 
   return (
     <Modal
-      width={640}
-      bodyStyle={{ padding: '32px 40px 48px' }}
       destroyOnClose
-      title="规则配置"
-      visible={updateModalVisible}
-      footer={renderFooter()}
-      onCancel={() => handleUpdateModalVisible()}
+      title="Update User"
+      visible={modalVisible}
+      onCancel={() => onCancel()}
+      footer={null}
     >
-      <Steps style={{ marginBottom: 28 }} size="small" current={currentStep}>
-        <Step title="基本信息" />
-        <Step title="配置规则属性" />
-        <Step title="设定调度周期" />
-      </Steps>
       <Form
-        {...formLayout}
+        {...formItemLayout}
         form={form}
+        name="register"
+        onFinish={onFinish}
         initialValues={{
-          target: formVals.target,
-          template: formVals.template,
-          type: formVals.type,
-          frequency: formVals.frequency,
-          name: formVals.name,
-          desc: formVals.desc,
+          prefix: '84',
+          fullName: 'A Tran',
+          email: 'At@pems.com',
+          phone: '0987654321',
+          role:'admin',
+          dob: moment('1997/20/10', 'YYYY/DD/MM')
         }}
+        scrollToFirstError
       >
-        {renderContent()}
+        <Form.Item
+          name="fullName"
+          label="Full name"
+          rules={[
+            {
+              required: true,
+              message: 'Please input full name!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          label="E-mail"
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+            {
+              required: true,
+              message: 'Please input E-mail!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          name="dob"
+          label="Date Of Birth"
+          rules={[
+
+            {
+              required: true,
+              message: 'Please input Date of birth!',
+            },
+          ]}
+        >
+          <DatePicker format={'MM/DD/YYYY'} />
+        </Form.Item>
+
+        <Form.Item
+          name="role"
+          label="Role"
+          rules={[
+
+            {
+              required: true,
+              message: 'Please select Role!',
+            },
+          ]}
+        >
+          <Select >
+            <Select.Option value="admin">Admin</Select.Option>
+            <Select.Option value="user">User</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          name="isActive"
+          label="Status"
+        >
+         <Switch unCheckedChildren={'Inactive'} checkedChildren={'Active'} defaultChecked={true} />
+        </Form.Item>
+
+        <Form.Item
+          name="phone"
+          label="Phone Number"
+          rules={[
+            {
+              required: true,
+              message: 'Please input phone number!',
+            },
+          ]}
+        >
+          <Input
+            addonBefore={prefixSelector}
+            style={{
+              width: '100%',
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit">
+            Save
+        </Button> &nbsp;
+        <Button onClick={() => onCancel()}>
+            Cancel
+        </Button>
+        </Form.Item>
       </Form>
     </Modal>
   );

@@ -4,6 +4,7 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { ChartCard } from './Charts';
 import { VisitDataType } from '../data.d';
+import { history } from "umi";
 // import Yuan from '../utils/Yuan';
 // import preTreatment from '';
 
@@ -18,7 +19,7 @@ const topColResponsiveProps = {
 };
 
 const IntroduceRow = ({ loading }: { loading: boolean; visitData: VisitDataType[] }) => (
-  <Row gutter={8}>
+  <Row gutter={16}>
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
@@ -27,6 +28,7 @@ const IntroduceRow = ({ loading }: { loading: boolean; visitData: VisitDataType[
         loading={loading}
         total={() => <> <ArrowDownOutlined style={{ color: 'green' }} /> 5.9%</>}
         contentHeight={46}
+        onClick={() =>  history.push(`/line/rgb-line`)}
       >
 
         <Row>
@@ -55,6 +57,7 @@ const IntroduceRow = ({ loading }: { loading: boolean; visitData: VisitDataType[
         loading={loading}
         total={() => <> <ArrowDownOutlined style={{ color: 'green' }} /> 4.1%</>}
         contentHeight={46}
+        onClick={() =>  history.push(`/line/rgb-line`)}
       >
 
         <Row>
@@ -82,6 +85,7 @@ const IntroduceRow = ({ loading }: { loading: boolean; visitData: VisitDataType[
         loading={loading}
         total={() => <> <ArrowDownOutlined style={{ color: 'green' }} /> 3.1%</>}
         contentHeight={46}
+        onClick={() =>  history.push(`/line/rgb-line`)}
       >
 
         <Row>
@@ -110,6 +114,7 @@ const IntroduceRow = ({ loading }: { loading: boolean; visitData: VisitDataType[
         loading={loading}
         total={() => <> <ArrowDownOutlined style={{ color: 'green' }} /> 3.6%</>}
         contentHeight={46}
+        onClick={() =>  history.push(`/line/rgb-line`)}
       >
 
         <Row>
@@ -138,6 +143,7 @@ const IntroduceRow = ({ loading }: { loading: boolean; visitData: VisitDataType[
         loading={loading}
         total={() => <> <ArrowDownOutlined style={{ color: 'green' }} /> 7.3%</>}
         contentHeight={46}
+        onClick={() =>  history.push(`/line/rgb-line`)}
       >
 
         <Row>
@@ -166,6 +172,7 @@ const IntroduceRow = ({ loading }: { loading: boolean; visitData: VisitDataType[
         loading={loading}
         total={() => <> <ArrowDownOutlined style={{ color: 'green' }} /> 6.9%</>}
         contentHeight={46}
+        onClick={() =>  history.push(`/line/rgb-line`)}
       >
 
         <Row>

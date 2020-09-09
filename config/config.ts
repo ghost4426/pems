@@ -108,7 +108,27 @@ export default defineConfig({
               path: '/setting',
               name: 'Setting',
               icon: 'setting',
-              component: './Blank',
+              routes:
+              [
+                {
+                  name: 'Users',
+                  icon: 'team',
+                  path: '/setting/user',
+                  component: './ListTableList',
+                },
+                {
+                  name: 'Meters',
+                  icon: 'dashboard',
+                  path: '/setting/meter',
+                  component: './Blank',
+                },
+                {
+                  name: 'Lines',
+                  icon: 'apartment',
+                  path: '/setting/line',
+                  component: './Blank',
+                },
+              ],
             },
             {
               name: 'Account',
@@ -121,17 +141,21 @@ export default defineConfig({
                   path: '/account/center',
                   component: './account/center',
                 },
-                {
-                  name: 'Settings',
-                  icon: 'smile',
-                  path: '/account/settings',
-                  component: './account/settings',
-                },
+                // {
+                //   name: 'Settings',
+                //   icon: 'smile',
+                //   path: '/account/settings',
+                //   component: './account/settings',
+                // },
               ],
             },
             {
               path: '/',
-              redirect: '/dashboard',
+              redirect: '/home',
+            },
+            {
+              path: '/line/rgb-line',
+              component: './LineInspector',
             },
             {
               component: '404',

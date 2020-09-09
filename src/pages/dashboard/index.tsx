@@ -106,7 +106,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     return (
       <GridContent>
         <React.Fragment>
-          <Row align="middle" justify="space-between" gutter={[8, 8]}>
+          <Row align="middle" justify="space-between" gutter={[16, 16]}>
             <Col span={10}>
               <Radio.Group
                 style={{ width: '100%' }}
@@ -170,10 +170,10 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
           </Row>
 
           <Suspense fallback={<PageLoading />}>
-            <IntroduceRow loading={false} />
+            <IntroduceRow  visitData={[]} loading={false} />
           </Suspense>
           <Suspense fallback={null}>
-            <Row justify={'end'}>
+            <Row justify={'end'} gutter={[16,0]}>
               <Col span={12}>
                 <Card bodyStyle={{ padding: 0 }}>
                   <Col span={24}>

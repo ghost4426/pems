@@ -1,16 +1,16 @@
+import { Moment } from "moment";
+
 export interface TableListItem {
   key: number;
   disabled?: boolean;
-  href: string;
-  avatar: string;
   name: string;
-  owner: string;
-  desc: string;
-  callNo: number;
-  status: number;
-  updatedAt: Date;
-  createdAt: Date;
-  progress: number;
+  email: string;
+  phoneNo: string;
+  isActive: boolean;
+  role: 'Admin'| 'User';
+  dob: Moment;
+  updatedAt: Moment;
+  createdAt: Moment;
 }
 
 export interface TableListPagination {
@@ -28,7 +28,7 @@ export interface TableListParams {
   sorter?: string;
   status?: string;
   name?: string;
-  desc?: string;
+  // role?: string;
   key?: number;
   pageSize?: number;
   currentPage?: number;

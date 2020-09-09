@@ -2,21 +2,23 @@
 import React from 'react';
 import { Card, Row, Col, Form, DatePicker, Select, Button } from 'antd';
 import BrushLineChart from './BrushLineChart';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 export default function Historian() {
   return (
+    <PageHeaderWrapper >
     <Row gutter={[8, 8]}>
       <Col span={6}>
         <Card title={'Query'}>
           <Form layout="vertical">
             <Form.Item label={'From'}>
-              <DatePicker style={{ width: 200 }} format={'MM/DD/YYYY'} />
+              <DatePicker style={{ width: '100%' }} format={'MM/DD/YYYY'} />
             </Form.Item>
             <Form.Item label={'To'}>
-              <DatePicker style={{ width: 200 }} format={'MM/DD/YYYY'} />
+              <DatePicker style={{ width: '100%'  }} format={'MM/DD/YYYY'} />
             </Form.Item>
             <Form.Item label={'Energy'}>
-              <Select defaultValue="2" style={{ width: 200 }}>
+              <Select defaultValue="2" style={{ width: '100%'  }}>
                 <Select.Option value="1">Electricity</Select.Option>
                 <Select.Option value="2">Water</Select.Option>
                 <Select.Option value="3">Air</Select.Option>
@@ -25,23 +27,23 @@ export default function Historian() {
               </Select>
             </Form.Item>
             <Form.Item label={'Meters'}>
-              <Select defaultValue={['1', '2', '3']} style={{ width: 200 }} mode="multiple">
+              <Select defaultValue={['1', '2', '3']} style={{ width: '100%'  }} mode="multiple">
                 <Select.Option value="1">STM01</Select.Option>
                 <Select.Option value="2">STM02</Select.Option>
                 <Select.Option value="3">STM03</Select.Option>
               </Select>
             </Form.Item>
             <Form.Item label={'Value'}>
-              <Select defaultValue="1" style={{ width: 200 }}>
+              <Select defaultValue="1" style={{ width: '100%'  }}>
                 <Select.Option value="1">Mass Flow</Select.Option>
               </Select>
             </Form.Item>
           </Form>
-          <Button type={'primary'} style={{ marginBottom: 8, width: 200 }}>
+          <Button type={'primary'} style={{ marginBottom: 8, width: '100%'  }}>
             Add
           </Button>{' '}
           <br />
-          <Button type={'primary'} style={{ paddingBottom: 8, width: 200 }}>
+          <Button type={'primary'} style={{ paddingBottom: 8, width: '100%'  }}>
             Clear
           </Button>
         </Card>
@@ -52,5 +54,6 @@ export default function Historian() {
         </Card>
       </Col>
     </Row>
+    </PageHeaderWrapper>
   );
 }

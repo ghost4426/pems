@@ -4,9 +4,11 @@ import { Card, Row, Col, Button, DatePicker, Select } from 'antd';
 import { connect } from 'umi';
 import LineChart from './LineChart';
 import { Pie } from '../dashboard/components/Charts';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 function Analysis() {
   return (
+    <PageHeaderWrapper >
     <Card>
       <Row>
         <Col span={24}>
@@ -78,6 +80,7 @@ function Analysis() {
         </Col>
       </Row>
     </Card>
+    </PageHeaderWrapper >
   );
 }
 

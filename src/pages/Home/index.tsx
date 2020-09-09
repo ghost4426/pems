@@ -8,37 +8,37 @@ import { Card, Dropdown, Button, Menu, Row, Col } from 'antd';
 const menu = (
     <Menu>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`#`)}>
+            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`/line/rgb-line`)}>
                 Main water map
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`#`)}>
+            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`/line/rgb-line`)}>
                 Pre-treatment Water
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`#`)}>
+            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`/line/rgb-line`)}>
                 RO Room
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`#`)}>
+            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`/line/rgb-line`)}>
                 Line CAN
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`#`)}>
+            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`/line/rgb-line`)}>
                 Line Aqua
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`#`)}>
+            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`/line/rgb-line`)}>
                Line PET
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`#`)}>
+            <a target="_blank" rel="noopener noreferrer" onClick={() =>   history.push(`/line/rgb-line`)}>
             Line RGB
         </a>
         </Menu.Item>
@@ -68,7 +68,7 @@ class Home extends Component {
                                     <Button size={'large'} ><i className="fas fa-bolt" style={{paddingRight: 8}} />  Electricity</Button>
                                 </Dropdown>
                                 <Dropdown overlay={menu}>
-                                    <Button  size={'large'} onDoubleClick={() =>  history.push(`/`)} ><i className="fas fa-tint" style={{paddingRight: 8}} /> Water</Button>
+                                    <Button  size={'large'} onClick={() =>  history.push(`/`)} ><i className="fas fa-tint" style={{paddingRight: 8}} /> Water</Button>
                                 </Dropdown>
                                 <Dropdown overlay={menu}>
                                     <Button  size={'large'}><i className="fas fa-wind" style={{paddingRight: 8}} /> Air</Button>
