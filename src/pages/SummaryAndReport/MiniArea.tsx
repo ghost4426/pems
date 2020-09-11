@@ -1,8 +1,8 @@
 import { Axis, Chart, Geom, Tooltip, AxisProps } from 'bizcharts';
 
 import React from 'react';
-import autoHeight from '../autoHeight';
-import styles from '../index.less';
+import autoHeight from './autoHeight';
+import styles from './index.less';
 
 export interface MiniAreaProps {
   color?: string;
@@ -65,8 +65,7 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
     }),
   ];
 
-  const chartHeight = height + 150;
-  console.log("chartHeight", chartHeight)
+  const chartHeight = height + 54;
 
   return (
     <div className={styles.miniChart} style={{ height }}>

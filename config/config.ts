@@ -100,9 +100,9 @@ export default defineConfig({
             },
             {
               path: '/report',
-              name: 'Reports',
+              name: 'Summary & Reports',
               icon: 'fileText',
-              component: './Blank',
+              component: './SummaryAndReport',
             },
             {
               path: '/setting',
