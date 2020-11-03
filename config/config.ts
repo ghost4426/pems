@@ -108,8 +108,7 @@ export default defineConfig({
               path: '/setting',
               name: 'Setting',
               icon: 'setting',
-              routes:
-              [
+              routes: [
                 {
                   name: 'Users',
                   icon: 'team',
@@ -120,13 +119,13 @@ export default defineConfig({
                   name: 'Meters',
                   icon: 'dashboard',
                   path: '/setting/meter',
-                  component: './Blank',
+                  component: './MeterTableList',
                 },
                 {
                   name: 'Lines',
                   icon: 'apartment',
                   path: '/setting/line',
-                  component: './Blank',
+                  component: './LineTableList',
                 },
               ],
             },

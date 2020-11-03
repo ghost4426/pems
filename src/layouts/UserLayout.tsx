@@ -39,22 +39,24 @@ const UserLayout: React.FC<UserLayoutProps> = (props) => {
         <meta name="description" content={title} />
       </Helmet>
 
-      <div className={styles.container}>
-        <div className={styles.lang}>
+      <div className={styles.container} style={{ backgroundImage: `url('/wall-paper.jpg')` }}>
+        {/* <div className={styles.lang}>
           <SelectLang />
-        </div>
+        </div> */}
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.header}>
               <Link to="/">
-                <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>Pesico Energy</span>
+                {/* <img alt="logo" className={styles.logo} src={logo} /> */}
+                <span className={styles.title}>SUNTORY PEPSICO </span>
+                <br />
+                <span className={styles.title}>VIETNAM-DONG NAI PLANT</span>
               </Link>
             </div>
           </div>
           {children}
         </div>
-        <DefaultFooter copyright="2020 NK Engineering" links={[]} />
+        {/* <DefaultFooter copyright="2020 NK Engineering" links={[]} /> */}
       </div>
     </HelmetProvider>
   );

@@ -1,4 +1,4 @@
-import { Alert, Checkbox } from 'antd';
+import { Alert, Checkbox, Col, Row } from 'antd';
 import React, { useState } from 'react';
 import { Dispatch, AnyAction, connect, history } from 'umi';
 import { StateType } from './model';
@@ -37,9 +37,12 @@ const Login: React.FC<LoginProps> = (props) => {
   return (
     <div className={styles.main}>
       <LoginFrom activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
-        <Tab key="account" tab="Account">
+        <div style={{ marginTop: 80 }}>
+          <Row justify={'center'} gutter={[0, 16]}>
+            <Col style={{ fontSize: 18, color: '#ffff', fontWeight: 500 }}>User Login Page</Col>
+          </Row>
           {status === 'error' && loginType === 'account' && !submitting && (
-            <LoginMessage content="账户或密码错误（admin/ant.design）" />
+            <LoginMessage content="An error has occur" />
           )}
 
           <UserName
@@ -62,13 +65,13 @@ const Login: React.FC<LoginProps> = (props) => {
               },
             ]}
           />
-        </Tab>
-        <div>
+        </div>
+        {/* <div>
           <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
             Remember Me
           </Checkbox>
-        </div>
-        <Submit loading={submitting}>Sign Up</Submit>
+        </div> */}
+        <Submit loading={submitting}>Login</Submit>
       </LoginFrom>
     </div>
   );

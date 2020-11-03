@@ -1,0 +1,16 @@
+.document_modal .ant-modal-content {
+  background: transparent;
+  box-shadow: none;
+}
+
+.document_modal .ant-modal-body {
+  padding: 0;
+}
+
+.react-pdf__Page__canvas {
+  pointer-events: none;
+}
+
+.no-event {
+  pointer-events: none;
+}

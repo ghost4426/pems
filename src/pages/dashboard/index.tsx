@@ -170,10 +170,10 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
           </Row>
 
           <Suspense fallback={<PageLoading />}>
-            <IntroduceRow  visitData={[]} loading={false} />
+            <IntroduceRow visitData={[]} loading={false} />
           </Suspense>
           <Suspense fallback={null}>
-            <Row justify={'end'} gutter={[16,0]}>
+            <Row justify={'end'} gutter={[16, 0]}>
               <Col span={12}>
                 <Card bodyStyle={{ padding: 0 }}>
                   <Col span={24}>
@@ -181,7 +181,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
                       <Col span={12}>
                         <Row align={'middle'} justify={'center'} style={{ padding: 20 }}>
                           <Col span={24} style={{ textAlign: 'center' }}>
-                            <Typography.Title level={4}>Pepsico Quang Nam Plant:</Typography.Title>
+                            <Typography.Title level={4}>Pepsico Dong Nai Plant:</Typography.Title>
                           </Col>
                           <Col span={24} style={{ textAlign: 'center' }}>
                             Water KPI
@@ -203,7 +203,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
                         <img
                           alt=""
                           style={{ width: '100%', height: '100%' }}
-                          src={'/pepsico-quang-nam.jpg'}
+                          src={'/pepsico-dong-nai.jpg'}
                         />
                       </Col>
                     </Row>
