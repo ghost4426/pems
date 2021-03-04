@@ -18,7 +18,7 @@ import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { getAuthorityFromRouter } from '@/utils/utils';
-import logo from '../assets/logo.svg';
+import logo from '../assets/SuntoryPepsiCo_1412267258.png';
 
 const noMatch = (
   <Result
@@ -57,33 +57,7 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
 
-const defaultFooterDom = (
-  <DefaultFooter
-    copyright="2020 NK Engineering"
-    links={
-      [
-        // {
-        //   key: 'Ant Design Pro',
-        //   title: 'Ant Design Pro',
-        //   href: 'https://pro.ant.design',
-        //   blankTarget: true,
-        // },
-        // {
-        //   key: 'github',
-        //   title: <GithubOutlined />,
-        //   href: 'https://github.com/ant-design/ant-design-pro',
-        //   blankTarget: true,
-        // },
-        // {
-        //   key: 'Ant Design',
-        //   title: 'Ant Design',
-        //   href: 'https://ant.design',
-        //   blankTarget: true,
-        // },
-      ]
-    }
-  />
-);
+const defaultFooterDom = <DefaultFooter copyright="2020 NK Engineering" />;
 
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   const {
@@ -151,8 +125,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
           return first ? (
             <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
           ) : (
-            <span>{route.breadcrumbName}</span>
-          );
+              <span>{route.breadcrumbName}</span>
+            );
         }}
         footerRender={() => defaultFooterDom}
         menuDataRender={menuDataRender}

@@ -47,7 +47,7 @@ class ChartCard extends React.Component<ChartCardProps> {
             [styles.chartTopMargin]: !children && !footer,
           })}
         >
-          <div style={{width: '100%', textAlign: 'center', fontSize: '1.2rem'}}>{title}</div>
+          <div style={{width: '100%', textAlign: 'center', fontSize: '1rem', padding: '8px 0px'}}>{title}</div>
           <div className={styles.avatar}>{avatar}</div>
           <div className={styles.metaWrap}>
             {/* <div className={styles.meta}>

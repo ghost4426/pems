@@ -55,7 +55,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: 'Pepsico Energy',
+  title: 'Pepsico EMS',
   pwa: false,
   iconfontUrl: '',
 } as DefaultSettings;

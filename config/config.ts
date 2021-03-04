@@ -99,10 +99,23 @@ export default defineConfig({
               component: './Historian',
             },
             {
-              path: '/report',
+              path: '/sandr',
               name: 'Summary & Reports',
               icon: 'fileText',
-              component: './SummaryAndReport',
+              routes: [
+                {
+                  name: 'Summary',
+                  icon: 'fileText',
+                  path: '/sandr/summary',
+                  component: './SummaryAndReport',
+                },
+                {
+                  name: 'Report',
+                  icon: 'fileText',
+                  path: '/sandr/report',
+                  component: './Report',
+                },
+              ],
             },
             {
               path: '/setting',
@@ -114,6 +127,18 @@ export default defineConfig({
                   icon: 'team',
                   path: '/setting/user',
                   component: './ListTableList',
+                },
+                {
+                  name: 'KPI',
+                  icon: 'rise',
+                  path: '/setting/kpiSetting',
+                  component: './KPISetting',
+                },
+                {
+                  name: 'FLow Meter',
+                  icon: 'gold',
+                  path: '/setting/flowMeterSetting',
+                  component: './FlowMeterSetting',
                 },
                 {
                   name: 'Meters',
@@ -155,6 +180,10 @@ export default defineConfig({
             {
               path: '/line/rgb-line',
               component: './LineInspector',
+            },
+            {
+              path: '/line/electric-line',
+              component: './ElectricLine',
             },
             {
               component: '404',

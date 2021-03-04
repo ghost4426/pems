@@ -70,7 +70,7 @@ const UpdateForm: React.FC<CreateFormProps> = (props) => {
           fullName: 'A Tran',
           email: 'At@pems.com',
           phone: '0987654321',
-          role:'admin',
+          role: 'admin',
           dob: moment('1997/20/10', 'YYYY/DD/MM')
         }}
         scrollToFirstError
@@ -131,7 +131,8 @@ const UpdateForm: React.FC<CreateFormProps> = (props) => {
         >
           <Select >
             <Select.Option value="admin">Admin</Select.Option>
-            <Select.Option value="user">User</Select.Option>
+            <Select.Option value="manager">Manager</Select.Option>
+            <Select.Option value="operator">Operator</Select.Option>
           </Select>
         </Form.Item>
 
@@ -139,7 +140,7 @@ const UpdateForm: React.FC<CreateFormProps> = (props) => {
           name="isActive"
           label="Status"
         >
-         <Switch unCheckedChildren={'Inactive'} checkedChildren={'Active'} defaultChecked={true} />
+          <Switch unCheckedChildren={'Inactive'} checkedChildren={'Active'} defaultChecked={true} />
         </Form.Item>
 
         <Form.Item

@@ -7,53 +7,107 @@ import { Card, Dropdown, Button, Menu, Row, Col } from 'antd';
 const menu = (
   <Menu>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=wt1`)}
+      >
         RO-WWT1 System
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=wt2`)}
+      >
         RO-WWT2 System
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=t`)}
+      >
         Line T
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=u`)}
+      >
         Line CAN CF-HF6000 (Line U)
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=w`)}
+      >
         Line W
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=bib`)}
+      >
         Line BIB
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
-        Line BIB
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=z`)}
+      >
         Line Z
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=q`)}
+      >
         Line Q
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" onClick={() => history.push(`/line/rgb-line`)}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/rgb-line?line=y`)}
+      >
         Line Y
+      </a>
+    </Menu.Item>
+  </Menu>
+);
+
+const electricityMenu = (
+  <Menu>
+    <Menu.Item>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/electric-line`)}
+      >
+        Utility 1
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => history.push(`/line/electric-line`)}
+      >
+        Utility 2
       </a>
     </Menu.Item>
   </Menu>
@@ -80,13 +134,13 @@ class Home extends Component {
               <Col>
                 <Card bodyStyle={{ backgroundColor: '#054467' }}>
                   <Dropdown overlay={menu}>
-                    <Button size={'large'}>
-                      <i className="fas fa-bolt" style={{ paddingRight: 8 }} /> Electricity
-                    </Button>
-                  </Dropdown>
-                  <Dropdown overlay={menu}>
                     <Button size={'large'} onClick={() => history.push(`/`)}>
                       <i className="fas fa-tint" style={{ paddingRight: 8 }} /> Water
+                    </Button>
+                  </Dropdown>
+                  <Dropdown overlay={electricityMenu}>
+                    <Button size={'large'}>
+                      <i className="fas fa-bolt" style={{ paddingRight: 8 }} /> Electricity
                     </Button>
                   </Dropdown>
                   <Dropdown overlay={menu}>

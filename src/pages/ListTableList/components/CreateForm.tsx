@@ -58,61 +58,61 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       onCancel={() => onCancel()}
       footer={null}
     >
-     <Form
-      {...formItemLayout}
-      form={form}
-      name="register"
-      onFinish={onFinish}
-      initialValues={{
-        prefix: '84',
-      }}
-      scrollToFirstError
-    >
-       <Form.Item
-        name="fullName"
-        label="Full name"
-        rules={[
-          {
-            required: true,
-            message: 'Please input full name!',
-          },
-        ]}
+      <Form
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        initialValues={{
+          prefix: '84',
+        }}
+        scrollToFirstError
       >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
-          },
-          {
-            required: true,
-            message: 'Please input E-mail!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          name="fullName"
+          label="Full name"
+          rules={[
+            {
+              required: true,
+              message: 'Please input full name!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          label="E-mail"
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+            {
+              required: true,
+              message: 'Please input E-mail!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item
-        name="dob"
-        label="Date Of Birth"
-        rules={[
-         
-          {
-            required: true,
-            message: 'Please input Date of birth!',
-          },
-        ]}
-      >
-        <DatePicker />
-      </Form.Item>
+        <Form.Item
+          name="dob"
+          label="Date Of Birth"
+          rules={[
+
+            {
+              required: true,
+              message: 'Please input Date of birth!',
+            },
+          ]}
+        >
+          <DatePicker />
+        </Form.Item>
 
 
-      <Form.Item
+        <Form.Item
           name="role"
           label="Role"
           rules={[
@@ -125,75 +125,76 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         >
           <Select >
             <Select.Option value="admin">Admin</Select.Option>
-            <Select.Option value="user">User</Select.Option>
+            <Select.Option value="manager">Manager</Select.Option>
+            <Select.Option value="operator">Operator</Select.Option>
           </Select>
         </Form.Item>
 
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input password!',
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Please confirm password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-
-              return Promise.reject('The two passwords that you entered do not match!');
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input password!',
             },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+          ]}
+          hasFeedback
+        >
+          <Input.Password />
+        </Form.Item>
 
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[
-          {
-            required: true,
-            message: 'Please input phone number!',
-          },
-        ]}
-      >
-        <Input
-          addonBefore={prefixSelector}
-          style={{
-            width: '100%',
-          }}
-        />
-      </Form.Item>
+        <Form.Item
+          name="confirm"
+          label="Confirm Password"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Please confirm password!',
+            },
+            ({ getFieldValue }) => ({
+              validator(value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
 
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Save
+                return Promise.reject('The two passwords that you entered do not match!');
+              },
+            }),
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item
+          name="phone"
+          label="Phone Number"
+          rules={[
+            {
+              required: true,
+              message: 'Please input phone number!',
+            },
+          ]}
+        >
+          <Input
+            addonBefore={prefixSelector}
+            style={{
+              width: '100%',
+            }}
+          />
+        </Form.Item>
+
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit">
+            Save
         </Button> &nbsp;
-        <Button  onClick={() => onCancel()}>
-          Cancel
+        <Button onClick={() => onCancel()}>
+            Cancel
         </Button>
-      </Form.Item>
-    </Form>
+        </Form.Item>
+      </Form>
     </Modal>
   );
 };

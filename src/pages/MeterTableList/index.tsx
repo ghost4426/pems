@@ -148,7 +148,7 @@ const LineTableList: React.FC<{}> = () => {
 
   return (
     <PageHeaderWrapper>
-      <IntlProvider value={{ intl: enUSIntl }}>
+      <IntlProvider value={enUSIntl}>
         <ProTable<TableListItem>
           headerTitle="Meter list"
           actionRef={actionRef}

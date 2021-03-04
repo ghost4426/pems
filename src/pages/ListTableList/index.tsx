@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Button, Divider, Dropdown, Menu, message } from 'antd';
 import React, { useState, useRef } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import ProTable, { ProColumns, ActionType,  IntlProvider ,enUSIntl} from '@ant-design/pro-table';
+import ProTable, { ProColumns, ActionType, IntlProvider, enUSIntl } from '@ant-design/pro-table';
 import { SorterResult } from 'antd/es/table/interface';
 import CreateForm from './components/CreateForm';
 // import UpdateForm, { FormValueType } from './components/UpdateForm';
@@ -67,9 +67,9 @@ const TableList: React.FC<{}> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [dataSource] = useState<TableListItem[]>([{
-    key:1,name:"A Tran",email:'At@pems.com',isActive: true,createdAt: moment('1997/10/20', 'YYYY/MM/DD'),phoneNo: '0987654321',role: 'Admin',updatedAt: moment('2020/08/20', 'YYYY/MM/DD'),dob: moment('1997/10/20', 'YYYY/MM/DD')
+    key: 1, name: "A Tran", email: 'At@pems.com', isActive: true, createdAt: moment('1997/10/20', 'YYYY/MM/DD'), phoneNo: '0987654321', role: 'Admin', updatedAt: moment('2020/08/20', 'YYYY/MM/DD'), dob: moment('1997/10/20', 'YYYY/MM/DD')
   }])
-  
+
   const actionRef = useRef<ActionType>();
 
 
@@ -142,60 +142,60 @@ const TableList: React.FC<{}> = () => {
 
   return (
     <PageHeaderWrapper>
-<IntlProvider value={ {intl: enUSIntl}}>
+      <IntlProvider value={enUSIntl}>
 
-      <ProTable<TableListItem>
-        headerTitle="User list"
-        actionRef={actionRef}
-        rowKey="key"
-        onChange={(_, _filter, _sorter) => {
-          const sorterResult = _sorter as SorterResult<TableListItem>;
-          if (sorterResult.field) {
-            setSorter(`${sorterResult.field}_${sorterResult.order}`);
-          }
-        }}
-        params={{
-          sorter,
-        }}
-        toolBarRender={(action, { selectedRows }) => [
-          <Button type="primary" onClick={() => handleModalVisible(true)}>
-            <PlusOutlined /> Create User
+        <ProTable<TableListItem>
+          headerTitle="User list"
+          actionRef={actionRef}
+          rowKey="key"
+          onChange={(_, _filter, _sorter) => {
+            const sorterResult = _sorter as SorterResult<TableListItem>;
+            if (sorterResult.field) {
+              setSorter(`${sorterResult.field}_${sorterResult.order}`);
+            }
+          }}
+          params={{
+            sorter,
+          }}
+          toolBarRender={(action, { selectedRows }) => [
+            <Button type="primary" onClick={() => handleModalVisible(true)}>
+              <PlusOutlined /> Create User
           </Button>,
-          selectedRows && selectedRows.length > 0 && (
-            <Dropdown
-              overlay={
-                <Menu
-                  onClick={async (e) => {
-                    if (e.key === 'remove') {
-                      await handleRemove(selectedRows);
-                      action.reload();
-                    }
-                  }}
-                  selectedKeys={[]}
-                >
-                  <Menu.Item key="remove">Remove</Menu.Item>
-                </Menu>
-              }
-            >
-              <Button>
-                Actions <DownOutlined />
-              </Button>
-            </Dropdown>
-          ),
-        ]}
-        tableAlertRender={({ selectedRowKeys }) => (
-          <div>
-            Selected <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> user&nbsp;&nbsp;
-            {/* <span>
+            selectedRows && selectedRows.length > 0 && (
+              <Dropdown
+                overlay={
+                  <Menu
+                    onClick={async (e) => {
+                      if (e.key === 'remove') {
+                        await handleRemove(selectedRows);
+                        action.reload();
+                      }
+                    }}
+                    selectedKeys={[]}
+                  >
+                    <Menu.Item key="remove">Remove</Menu.Item>
+                  </Menu>
+                }
+              >
+                <Button>
+                  Actions <DownOutlined />
+                </Button>
+              </Dropdown>
+            ),
+          ]}
+          tableAlertRender={({ selectedRowKeys }) => (
+            <div>
+              Selected <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> user&nbsp;&nbsp;
+              {/* <span>
             Total number of service calls {selectedRows.reduce((pre, item) => pre + item.callNo, 0)} 万
             </span> */}
-          </div>
-        )}
-        dataSource={dataSource}
-        columns={columns}
-        rowSelection={{}}
-      />
-</IntlProvider>;
+            </div>
+          )}
+          dataSource={dataSource}
+          columns={columns}
+          rowSelection={{}}
+        />
+      </IntlProvider>;
 
       <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
         <ProTable<TableListItem, TableListItem>
@@ -214,7 +214,7 @@ const TableList: React.FC<{}> = () => {
           rowSelection={{}}
         />
       </CreateForm>
-      <UpdateForm  onCancel={() => handleUpdateModalVisible(false)} modalVisible={updateModalVisible}/>
+      <UpdateForm onCancel={() => handleUpdateModalVisible(false)} modalVisible={updateModalVisible} />
 
       {/* {stepFormValues && Object.keys(stepFormValues).length ? (
         <UpdateForm

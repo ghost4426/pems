@@ -3,7 +3,7 @@ import { Col, Row } from 'antd';
 
 import React from 'react';
 import { ChartCard } from './Charts';
-import { VisitDataType } from '../data.d';
+import { VisitDataType } from '../data';
 import { history } from "umi";
 // import Yuan from '../utils/Yuan';
 // import preTreatment from '';
@@ -20,14 +20,14 @@ const topColResponsiveProps = {
 };
 
 const dataSource1 = [{
-  title: 'Utility 1',
-  imgSrc: '/line-area/utility.png',
+  title: 'RO WT1',
+  imgSrc: '/line-area/RO-Room.jpg',
   total: '5.9',
   actual: 95,
   expect: 23.3
 }, {
-  title: 'Utility 2',
-  imgSrc: '/line-area/utility.png',
+  title: 'RO WT2',
+  imgSrc: '/line-area/RO-Room.jpg',
   total: '5.9',
   actual: 95,
   expect: 23.3

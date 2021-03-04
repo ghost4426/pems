@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Progress, Tag } from 'antd';
+import { Row, Col, Card, Progress, Tag, Typography, Space } from 'antd';
 import styled from 'styled-components';
 import { CheckCircleOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { MiniArea, Pie } from '../dashboard/components/Charts';
@@ -99,7 +99,7 @@ export default function SummaryAndReport() {
                 <Row gutter={[8, 8]}>
                   <Col span={24}>
                     <div>
-                      <b>Quang Nam Plant</b>
+                      <b>Dong Nai Plant</b>
                     </div>
                     <div>Electricity (kWh) - 4 Weeks</div>
                   </Col>
@@ -344,32 +344,37 @@ export default function SummaryAndReport() {
                 <Card
                   bodyStyle={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                 >
-                  <Progress
-                    type="circle"
-                    status="success"
-                    percent={100}
-                    strokeColor={''}
-                    format={() => (
-                      <div>
-                        <div
-                          style={{
-                            height: 20,
-                            backgroundImage: 'url(/carbon-footprint.png)',
-                            backgroundSize: '20px',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                          }}
-                        ></div>
+                  <Space direction='vertical'>
+                    <Typography style={{ width: '100%', fontSize: 11 }}>Reduce Your Carbon FootPrint</Typography>
+                    <Progress
+                      style={{ display: 'flex', justifyContent: 'center' }}
+                      type="circle"
+                      status="success"
+                      percent={100}
+                      strokeColor={''}
+                      format={() => (
                         <div>
-                          <span style={{ fontSize: 30 }}>
-                            <b>0.1</b>
-                          </span>
-                          <span style={{ fontSize: 18 }}>%</span>
+                          <div
+                            style={{
+                              height: 20,
+                              backgroundImage: 'url(/carbon-footprint.png)',
+                              backgroundSize: '20px',
+                              backgroundPosition: 'center',
+                              backgroundRepeat: 'no-repeat',
+                            }}
+                          />
+                          <div>
+                            <span style={{ fontSize: 30 }}>
+                              <b>0.1</b>
+                            </span>
+                            <span style={{ fontSize: 18 }}>%</span>
+                          </div>
+                          <div style={{ fontSize: 15 }}>Release</div>
                         </div>
-                        <div style={{ fontSize: 15 }}>Release</div>
-                      </div>
-                    )}
-                  />
+                      )}
+                    />
+                  </Space>
+
                 </Card>
               </Col>
             </Row>
