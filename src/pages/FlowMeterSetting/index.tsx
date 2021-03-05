@@ -68,121 +68,121 @@ const eventDs = [
 export default function FlowMeterSetting() {
   const [mode, setMode] = useState('view');
   return (
-    <PageHeaderWrapper>
-      <Card>
-        {mode === 'view' && (
-          <Table
-            rowKey="meter"
-            dataSource={dataSource}
-            columns={[
-              {
-                title: 'Meter',
-                dataIndex: 'meter',
-                key: 'meter',
-              },
-              {
-                title: 'Total Flow (m3)',
-                dataIndex: 'totalFlow',
-                key: 'totalFlow',
-                width: 200,
-                align: 'center',
-              },
-              {
-                title: 'Loss Flow (m3)',
-                dataIndex: 'lossFlow',
-                key: 'lossFlow',
-                width: 200,
-                align: 'center',
-              },
-              {
-                title: '',
-                dataIndex: 'line',
-                key: 'name',
-                width: 150,
-                render: () => {
-                  return (
-                    <Button
-                      onClick={() => {
-                        setMode('edit');
-                      }}
-                      type="link"
-                    >
-                      Click Here To Edit
-                    </Button>
-                  );
-                },
-              },
-            ]}
-          />
-        )}
-        {mode === 'edit' && (
-          <Row justify={'space-between'}>
-            <Col style={{ marginRight: 16 }}>
-              <Form layout="vertical" style={{ width: 400 }}>
-                <Form.Item label={'From'}>
-                  <DatePicker
-                    style={{ width: '100%' }}
-                    value={moment('6:00 8/11/2020', 'h:mm D/M/YYYY')}
-                    format={'h:mm D/M/YYYY'}
-                  />
-                </Form.Item>
-                <Form.Item label={'To'}>
-                  <DatePicker
-                    style={{ width: '100%' }}
-                    value={moment('8:00 8/11/2020', 'h:mm D/M/YYYY')}
-                    format={'h:mm D/M/YYYY'}
-                  />
-                </Form.Item>
-                <Form.Item label={'Comment'}>
-                  <Input value={'Lưu lượng sử dụng CIP phân bổ'} />
-                </Form.Item>
-                <Form.Item label={'Ratio (%)'}>
-                  <Input value={'50:30:20'} />
-                </Form.Item>
-                <Space style={{ float: 'right' }}>
-                  <Button type={'primary'}>Add</Button>
+    // <PageHeaderWrapper>
+    <Card>
+      {mode === 'view' && (
+        <Table
+          rowKey="meter"
+          dataSource={dataSource}
+          columns={[
+            {
+              title: 'Meter',
+              dataIndex: 'meter',
+              key: 'meter',
+            },
+            {
+              title: 'Total Flow (m3)',
+              dataIndex: 'totalFlow',
+              key: 'totalFlow',
+              width: 200,
+              align: 'center',
+            },
+            {
+              title: 'Loss Flow (m3)',
+              dataIndex: 'lossFlow',
+              key: 'lossFlow',
+              width: 200,
+              align: 'center',
+            },
+            {
+              title: '',
+              dataIndex: 'line',
+              key: 'name',
+              width: 150,
+              render: () => {
+                return (
                   <Button
-                    type={'primary'}
                     onClick={() => {
-                      setMode('view');
+                      setMode('edit');
                     }}
+                    type="link"
                   >
-                    Back
+                    Click Here To Edit
                   </Button>
-                </Space>
-              </Form>
-            </Col>
-            <Col span={16}>
-              <Table
-                style={{ width: '100%' }}
-                dataSource={eventDs}
-                columns={[
-                  {
-                    title: 'Event',
-                    dataIndex: 'event',
-                    key: 'event',
-                  },
-                  {
-                    title: 'Line X (%)',
-                    dataIndex: 'x',
-                    key: 'x',
-                  },
-                  {
-                    title: 'Line Y (%)',
-                    dataIndex: 'y',
-                    key: 'y',
-                  },
-                  {
-                    title: 'Line Z (%)',
-                    dataIndex: 'z',
-                    key: 'z',
-                  },
-                ]}
-              />
-            </Col>
-          </Row>
-        )}
-      </Card>
-    </PageHeaderWrapper>
+                );
+              },
+            },
+          ]}
+        />
+      )}
+      {mode === 'edit' && (
+        <Row justify={'space-between'}>
+          <Col style={{ marginRight: 16 }}>
+            <Form layout="vertical" style={{ width: 400 }}>
+              <Form.Item label={'From'}>
+                <DatePicker
+                  style={{ width: '100%' }}
+                  value={moment('6:00 8/11/2020', 'h:mm D/M/YYYY')}
+                  format={'h:mm D/M/YYYY'}
+                />
+              </Form.Item>
+              <Form.Item label={'To'}>
+                <DatePicker
+                  style={{ width: '100%' }}
+                  value={moment('8:00 8/11/2020', 'h:mm D/M/YYYY')}
+                  format={'h:mm D/M/YYYY'}
+                />
+              </Form.Item>
+              <Form.Item label={'Comment'}>
+                <Input value={'Lưu lượng sử dụng CIP phân bổ'} />
+              </Form.Item>
+              <Form.Item label={'Ratio (%)'}>
+                <Input value={'50:30:20'} />
+              </Form.Item>
+              <Space style={{ float: 'right' }}>
+                <Button type={'primary'}>Add</Button>
+                <Button
+                  type={'primary'}
+                  onClick={() => {
+                    setMode('view');
+                  }}
+                >
+                  Back
+                </Button>
+              </Space>
+            </Form>
+          </Col>
+          <Col span={16}>
+            <Table
+              style={{ width: '100%' }}
+              dataSource={eventDs}
+              columns={[
+                {
+                  title: 'Event',
+                  dataIndex: 'event',
+                  key: 'event',
+                },
+                {
+                  title: 'Line X (%)',
+                  dataIndex: 'x',
+                  key: 'x',
+                },
+                {
+                  title: 'Line Y (%)',
+                  dataIndex: 'y',
+                  key: 'y',
+                },
+                {
+                  title: 'Line Z (%)',
+                  dataIndex: 'z',
+                  key: 'z',
+                },
+              ]}
+            />
+          </Col>
+        </Row>
+      )}
+    </Card>
+    // </PageHeaderWrapper>
   );
 }
