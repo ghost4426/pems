@@ -10,8 +10,6 @@ import CreateForm from './components/CreateForm';
 import { TableListItem } from './data.d';
 import UpdateForm from './components/UpdateForm';
 
-
-
 // 生成 intl 对象
 // const enUSIntl = createIntl('en_US', enLocale);
 // 使用
@@ -66,16 +64,21 @@ const TableList: React.FC<{}> = () => {
   const [sorter, setSorter] = useState<string>('');
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
-  const [dataSource] = useState<TableListItem[]>([{
-    key: 1, name: "A Tran", email: 'At@pems.com', isActive: true, createdAt: moment('1997/10/20', 'YYYY/MM/DD'), phoneNo: '0987654321', role: 'Admin', updatedAt: moment('2020/08/20', 'YYYY/MM/DD'), dob: moment('1997/10/20', 'YYYY/MM/DD')
-  }])
+  const [dataSource] = useState<TableListItem[]>([
+    {
+      key: 1,
+      name: 'A Tran',
+      email: 'At@pems.com',
+      isActive: true,
+      createdAt: moment('1997/10/20', 'YYYY/MM/DD'),
+      phoneNo: '0987654321',
+      role: 'Admin',
+      updatedAt: moment('2020/08/20', 'YYYY/MM/DD'),
+      dob: moment('1997/10/20', 'YYYY/MM/DD'),
+    },
+  ]);
 
   const actionRef = useRef<ActionType>();
-
-
-
-
-
 
   const columns: ProColumns<TableListItem>[] = [
     {
@@ -134,16 +137,16 @@ const TableList: React.FC<{}> = () => {
             Update
           </a>
           <Divider type="vertical" />
-          <a >Remove</a>
+          <a>Remove</a>
         </>
       ),
     },
   ];
 
   return (
-    <PageHeaderWrapper>
+    // <PageHeaderWrapper>
+    <>
       <IntlProvider value={enUSIntl}>
-
         <ProTable<TableListItem>
           headerTitle="User list"
           actionRef={actionRef}
@@ -160,7 +163,7 @@ const TableList: React.FC<{}> = () => {
           toolBarRender={(action, { selectedRows }) => [
             <Button type="primary" onClick={() => handleModalVisible(true)}>
               <PlusOutlined /> Create User
-          </Button>,
+            </Button>,
             selectedRows && selectedRows.length > 0 && (
               <Dropdown
                 overlay={
@@ -195,8 +198,8 @@ const TableList: React.FC<{}> = () => {
           columns={columns}
           rowSelection={{}}
         />
-      </IntlProvider>;
-
+      </IntlProvider>
+      ;
       <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
         <ProTable<TableListItem, TableListItem>
           onSubmit={async (value) => {
@@ -214,8 +217,10 @@ const TableList: React.FC<{}> = () => {
           rowSelection={{}}
         />
       </CreateForm>
-      <UpdateForm onCancel={() => handleUpdateModalVisible(false)} modalVisible={updateModalVisible} />
-
+      <UpdateForm
+        onCancel={() => handleUpdateModalVisible(false)}
+        modalVisible={updateModalVisible}
+      />
       {/* {stepFormValues && Object.keys(stepFormValues).length ? (
         <UpdateForm
           onSubmit={async (value) => {
@@ -236,7 +241,8 @@ const TableList: React.FC<{}> = () => {
           values={stepFormValues}
         />
       ) : null} */}
-    </PageHeaderWrapper>
+    </>
+    // </PageHeaderWrapper>
   );
 };
 

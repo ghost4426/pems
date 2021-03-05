@@ -147,7 +147,8 @@ const LineTableList: React.FC<{}> = () => {
   ];
 
   return (
-    <PageHeaderWrapper>
+    // <PageHeaderWrapper>
+    <>
       <IntlProvider value={enUSIntl}>
         <ProTable<TableListItem>
           headerTitle="Meter list"
@@ -228,7 +229,8 @@ const LineTableList: React.FC<{}> = () => {
         visible={documentModalVisible}
         fileType={'jpg'}
       />
-    </PageHeaderWrapper>
+    </>
+    // {/* </PageHeaderWrapper> */}
   );
 };
 

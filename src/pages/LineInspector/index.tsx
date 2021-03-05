@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, Card, Col, Row, Table, Tabs, Tag, Typography } from 'antd';
 
-const lineList = ['factory', 'wt1', 'wt2', 't', 'u', 'w', 'x', 'y', 'z', 'q', 'bib']
+const lineList = ['factory', 'wt1', 'wt2', 't', 'u', 'w', 'x', 'y', 'z', 'q', 'bib'];
 
 const dataSource = {
   factory: {
@@ -12,19 +12,20 @@ const dataSource = {
     mapImgSrc: '/line-map/factory.png',
     kpiExpected: 2.2,
     totalAmount: 2300,
-    meters: [{
-      name: 'F01',
-      volumeFlow: '344.223',
-      totalizer: 2396,
-      setPoint: 3000,
-    },
-    {
-      name: 'F45',
-      volumeFlow: '344.223',
-      totalizer: 2396,
-      setPoint: 3000,
-    }]
-
+    meters: [
+      {
+        name: 'F01',
+        volumeFlow: '344.223',
+        totalizer: 2396,
+        setPoint: 3000,
+      },
+      {
+        name: 'F45',
+        volumeFlow: '344.223',
+        totalizer: 2396,
+        setPoint: 3000,
+      },
+    ],
   },
   wt1: {
     key: 'factory',
@@ -56,7 +57,8 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
+      },
+    ],
   },
   wt2: {
     key: 'factory',
@@ -88,7 +90,8 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
+      },
+    ],
   },
   t: {
     key: 'factory',
@@ -126,8 +129,10 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
-  }, u: {
+      },
+    ],
+  },
+  u: {
     key: 'factory',
     lineName: 'LINE U (CAN 600 SIDEL)',
     mapImgSrc: '/line-map/u.png',
@@ -175,8 +180,10 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
-  }, w: {
+      },
+    ],
+  },
+  w: {
     key: 'factory',
     lineName: 'LINE W (PET 600-KHS)',
     mapImgSrc: '/line-map/w.png',
@@ -206,8 +213,10 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
-  }, x: {
+      },
+    ],
+  },
+  x: {
     key: 'factory',
     lineName: 'LINE X (PET-CSD 800 KRONES)',
     mapImgSrc: '/line-map/x.png',
@@ -237,8 +246,10 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
-  }, y: {
+      },
+    ],
+  },
+  y: {
     key: 'factory',
     lineName: 'LINE Y (PET-HF600-KRONES)',
     mapImgSrc: '/line-map/y.png',
@@ -268,8 +279,10 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
-  }, z: {
+      },
+    ],
+  },
+  z: {
     key: 'factory',
     lineName: 'LINE Z (RGB 600 LINKER)',
     mapImgSrc: '/line-map/z.png',
@@ -299,8 +312,10 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
-  }, q: {
+      },
+    ],
+  },
+  q: {
     key: 'factory',
     lineName: 'LINE Q (AQUA 800 KRONES)',
     mapImgSrc: '/line-map/q.png',
@@ -330,8 +345,10 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
-  }, bib: {
+      },
+    ],
+  },
+  bib: {
     key: 'factory',
     lineName: 'Line BIB',
     mapImgSrc: '/line-map/bib.png',
@@ -361,109 +378,120 @@ const dataSource = {
         volumeFlow: '344.223',
         totalizer: 2396,
         setPoint: 3000,
-      }]
-  }
-}
+      },
+    ],
+  },
+};
 
 export default function LineInspector(props: any) {
-
   const queryLine = props.location.query.line as string;
   const [currentLineIdx, setCurrentLineIdx] = useState(0);
   const [lineSelected, setLineSelected] = useState('factory');
 
-
   useEffect(() => {
     if (lineSelected !== queryLine && lineList.includes(queryLine)) {
       setLineSelected(queryLine);
-      setCurrentLineIdx(lineList.indexOf(queryLine))
+      setCurrentLineIdx(lineList.indexOf(queryLine));
     }
-  }, [])
+  }, []);
 
-  const nextLine = useCallback(
-    () => {
-      setCurrentLineIdx((idx) => {
-        const nextIdx = idx + 1;
-        setLineSelected(lineList[nextIdx]);
-        return nextIdx;
-      });
-    },
-    [setCurrentLineIdx, setLineSelected],
-  )
+  const nextLine = useCallback(() => {
+    setCurrentLineIdx((idx) => {
+      const nextIdx = idx + 1;
+      setLineSelected(lineList[nextIdx]);
+      return nextIdx;
+    });
+  }, [setCurrentLineIdx, setLineSelected]);
 
-  const preLine = useCallback(
-    () => {
-      setCurrentLineIdx((idx) => {
-        const nextIdx = idx - 1;
-        setLineSelected(lineList[nextIdx]);
-        return nextIdx;
-      });
-    },
-    [setCurrentLineIdx, setLineSelected],
-  )
+  const preLine = useCallback(() => {
+    setCurrentLineIdx((idx) => {
+      const nextIdx = idx - 1;
+      setLineSelected(lineList[nextIdx]);
+      return nextIdx;
+    });
+  }, [setCurrentLineIdx, setLineSelected]);
 
   return (
-    <PageHeaderWrapper
-      breadcrumb={{
-        routes: [
-          { breadcrumbName: 'Home', path: '' },
-          { breadcrumbName: 'Water', path: '/line/water' },
-        ],
-      }}
-      title={'Water'}
-    >
-      <Row gutter={[16, 8]}>
-        <Col span={24}>
-
-          <Row justify="space-between">
-            <Col>
-              <Button onClick={() => { preLine() }} disabled={currentLineIdx === 0} type='link' icon={<i style={{ fontSize: 55 }} className="far fa-arrow-alt-left" />} />
-            </Col>
-            <Col>
-              <Typography.Title>{dataSource[lineSelected].lineName}</Typography.Title>
-            </Col>
-            <Col>
-              <Button onClick={() => { nextLine() }} disabled={currentLineIdx === (lineList.length - 1)} type='link' icon={<i style={{ fontSize: 55 }} className="far fa-arrow-alt-right" />} />
-            </Col>
-          </Row>
-        </Col>
-        <Col md={12} xs={24}>
-          <Typography.Title level={3}>Line Overview</Typography.Title>
-          <Row gutter={[0, 8]} justify={'end'}>
-            <Col>
-              <Table
-                size={'small'}
-                pagination={{ hideOnSinglePage: true }}
-                bordered
-                dataSource={[{ expected: dataSource[lineSelected].kpiExpected, amount: dataSource[lineSelected].totalAmount }]}
-                columns={[
-                  {
-                    title: 'KPI Expected (L/L)',
-                    dataIndex: 'expected',
-                    align: 'center',
-                    width: 120,
-                  },
-                  {
-                    title: 'RGB Line Total Amount (L)    ',
-                    dataIndex: 'amount',
-                    align: 'center',
-                    width: 150,
-                  },
-                ]}
-              />
-            </Col>
-            <Col span={24}>
-              <Card bodyStyle={{ padding: 0 }}>
-                <img alt="" src={dataSource[lineSelected].mapImgSrc} style={{ width: '100%' }} />
-                {/* <div style={{width:'100%', textAlign: 'center', fontWeight:'bold'}}>RBG Line Map</div> */}
-              </Card>
-            </Col>
-          </Row>
-        </Col>
-        <Col md={12} xs={24}>
-          <Typography.Title level={3}>Meter Detail</Typography.Title>
-          <Row gutter={[16, 16]}>
-            {dataSource[lineSelected].meters.map((item: any) =>
-            (<Col md={12} xs={24}>
+    // <PageHeaderWrapper
+    //   breadcrumb={{
+    //     routes: [
+    //       { breadcrumbName: 'Home', path: '' },
+    //       { breadcrumbName: 'Water', path: '/line/water' },
+    //     ],
+    //   }}
+    //   title={'Water'}
+    // >
+    <Row gutter={[16, 8]}>
+      <Col span={24}>
+        <Row justify="space-between">
+          <Col>
+            <Button
+              onClick={() => {
+                preLine();
+              }}
+              disabled={currentLineIdx === 0}
+              type="link"
+              icon={<i style={{ fontSize: 55 }} className="far fa-arrow-alt-left" />}
+            />
+          </Col>
+          <Col>
+            <Typography.Title>{dataSource[lineSelected].lineName}</Typography.Title>
+          </Col>
+          <Col>
+            <Button
+              onClick={() => {
+                nextLine();
+              }}
+              disabled={currentLineIdx === lineList.length - 1}
+              type="link"
+              icon={<i style={{ fontSize: 55 }} className="far fa-arrow-alt-right" />}
+            />
+          </Col>
+        </Row>
+      </Col>
+      <Col md={12} xs={24}>
+        <Typography.Title level={3}>Line Overview</Typography.Title>
+        <Row gutter={[0, 8]} justify={'end'}>
+          <Col>
+            <Table
+              size={'small'}
+              pagination={{ hideOnSinglePage: true }}
+              bordered
+              dataSource={[
+                {
+                  expected: dataSource[lineSelected].kpiExpected,
+                  amount: dataSource[lineSelected].totalAmount,
+                },
+              ]}
+              columns={[
+                {
+                  title: 'KPI Expected (L/L)',
+                  dataIndex: 'expected',
+                  align: 'center',
+                  width: 120,
+                },
+                {
+                  title: 'RGB Line Total Amount (L)    ',
+                  dataIndex: 'amount',
+                  align: 'center',
+                  width: 150,
+                },
+              ]}
+            />
+          </Col>
+          <Col span={24}>
+            <Card bodyStyle={{ padding: 0 }}>
+              <img alt="" src={dataSource[lineSelected].mapImgSrc} style={{ width: '100%' }} />
+              {/* <div style={{width:'100%', textAlign: 'center', fontWeight:'bold'}}>RBG Line Map</div> */}
+            </Card>
+          </Col>
+        </Row>
+      </Col>
+      <Col md={12} xs={24}>
+        <Typography.Title level={3}>Meter Detail</Typography.Title>
+        <Row gutter={[16, 16]}>
+          {dataSource[lineSelected].meters.map((item: any) => (
+            <Col md={12} xs={24}>
               <Card bodyStyle={{ padding: 0 }}>
                 <Row>
                   <Col span={24} style={{ textAlign: 'center', paddingTop: 8 }}>
@@ -503,10 +531,10 @@ export default function LineInspector(props: any) {
                 </Row>
               </Card>
             </Col>
-            ))}
-          </Row>
-        </Col>
-      </Row>
-    </PageHeaderWrapper>
+          ))}
+        </Row>
+      </Col>
+    </Row>
+    // </PageHeaderWrapper>
   );
 }
