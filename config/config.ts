@@ -186,6 +186,10 @@ export default defineConfig({
               component: './ElectricLine',
             },
             {
+              path: '/line/steam-line',
+              component: './SteamLine',
+            },
+            {
               component: '404',
             },
           ],

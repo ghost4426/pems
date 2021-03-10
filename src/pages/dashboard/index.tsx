@@ -5,14 +5,15 @@ import { GridContent } from '@ant-design/pro-layout';
 import { connect } from 'umi';
 import PageLoading from './components/PageLoading';
 import { Pie } from './components/Charts';
-import IntroduceRowElec from './components/IntroduceRowElec';
 
-const IntroduceRow = React.lazy(() => import('./components/IntroduceRow'));
+const ElectricLineRow = React.lazy(() => import('./components/ElectricLineRow'));
+const WaterLineRow = React.lazy(() => import('./components/WaterLineRow'));
+const SteamLineRow = React.lazy(() => import('./components/SteamLineRow'));
 
 function Analysis(props: any) {
   const queryLine = props.location.query.energy as string;
 
-  const [energyType, setEnergyType] = useState('a');
+  const [energyType, setEnergyType] = useState('water');
 
   useEffect(() => {
     if (energyType !== queryLine && !!queryLine) {
@@ -78,13 +79,13 @@ function Analysis(props: any) {
               <Radio.Button style={{ width: '20%', textAlign: 'center' }} value="elec">
                 <i className="fas fas fa-bolt" />
               </Radio.Button>
-              <Radio.Button style={{ width: '20%', textAlign: 'center' }} value="c">
+              <Radio.Button style={{ width: '20%', textAlign: 'center' }} value="steam">
+                <i className="fas fa-heat" />
+              </Radio.Button>
+              <Radio.Button style={{ width: '20%', textAlign: 'center' }} value="air">
                 <i className="fas fa-wind" />
               </Radio.Button>
-              <Radio.Button style={{ width: '20%', textAlign: 'center' }} value="d">
-                <i className="fas fa-fire" />
-              </Radio.Button>
-              <Radio.Button style={{ width: '20%', textAlign: 'center' }} value="e">
+              <Radio.Button style={{ width: '20%', textAlign: 'center' }} value="co2">
                 <i className="fas fa-spinner" />
               </Radio.Button>
             </Radio.Group>
@@ -92,8 +93,11 @@ function Analysis(props: any) {
         </Row>
 
         <Suspense fallback={<PageLoading />}>
-          {energyType === 'elec' && <IntroduceRow visitData={[]} loading={false} />}
-          {energyType !== 'elec' && <IntroduceRowElec visitData={[]} loading={false} />}
+          {energyType === 'elec' && <ElectricLineRow visitData={[]} loading={false} />}
+          {energyType !== 'elec' && energyType !== 'steam' && (
+            <WaterLineRow visitData={[]} loading={false} />
+          )}
+          {energyType === 'steam' && <SteamLineRow visitData={[]} loading={false} />}
         </Suspense>
         <Suspense fallback={null}>
           <Row justify={'end'} gutter={[16, 0]}>

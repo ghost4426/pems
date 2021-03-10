@@ -15,6 +15,7 @@ const lineList = [
   'utility7',
   'utility8',
   'utility9',
+  'utility10',
 ];
 
 const dataSource = {
@@ -51,6 +52,10 @@ const dataSource = {
     imgSrc: '/line-elec/3. PEPSI DONG NAI ULTILITY 2 MSB2 RV0-page-1.svg',
   },
   utility9: {
+    lineName: 'UTILITY 2 MSB3',
+    imgSrc: '/line-elec/4. PEPSI DONG NAI ULTILITY 2 MSB3 RV0-page-1.svg',
+  },
+  utility10: {
     lineName: 'UTILITY 2 MSB4',
     imgSrc: '/line-elec/5. PEPSI DONG NAI ULTILITY 2 MSB4 RV0-page-1.svg',
   },
