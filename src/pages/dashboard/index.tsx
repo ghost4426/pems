@@ -125,9 +125,13 @@ function Analysis(props: any) {
                                 direction="vertical"
                                 style={{ fontSize: 24, lineHeight: '17px' }}
                               >
-                                <span>2.2 </span>
+                                <span>
+                                  {energyType === 'elec' || energyType === 'steam' ? 12 : 2.2}
+                                </span>
                                 <span style={{ fontSize: 16 }}>
-                                  {energyType === 'elec' ? 'Kwh/8oz' : 'L/L'}{' '}
+                                  {energyType === 'elec' || energyType === 'steam'
+                                    ? 'Kwh/8oz'
+                                    : 'L/L'}
                                 </span>
                               </Space>
                             }

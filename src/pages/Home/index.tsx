@@ -85,7 +85,7 @@ const steamMenu = (
         rel="noopener noreferrer"
         onClick={() => history.push(`/dashboard?energy=steam`)}
       >
-        RO-WWT1 System
+        Boiler 1
       </a>
     </Menu.Item>
     <Menu.Item>
@@ -94,7 +94,7 @@ const steamMenu = (
         rel="noopener noreferrer"
         onClick={() => history.push(`/dashboard?energy=steam`)}
       >
-        RO-WWT2 System
+        Boiler 2
       </a>
     </Menu.Item>
     <Menu.Item>
@@ -103,61 +103,7 @@ const steamMenu = (
         rel="noopener noreferrer"
         onClick={() => history.push(`/dashboard?energy=steam`)}
       >
-        Line T
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => history.push(`/dashboard?energy=steam`)}
-      >
-        Line CAN CF-HF6000 (Line U)
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => history.push(`/dashboard?energy=steam`)}
-      >
-        Line W
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => history.push(`/dashboard?energy=steam`)}
-      >
-        Line BIB
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => history.push(`/dashboard?energy=steam`)}
-      >
-        Line Z
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => history.push(`/dashboard?energy=steam`)}
-      >
-        Line Q
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => history.push(`/dashboard?energy=steam`)}
-      >
-        Line Y
+        Boiler 3
       </a>
     </Menu.Item>
   </Menu>

@@ -1,8 +1,8 @@
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { Button, Divider, Dropdown, Menu, message } from 'antd';
-import React, { useState, useRef } from 'react';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+// import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType, IntlProvider, enUSIntl } from '@ant-design/pro-table';
 import { SorterResult } from 'antd/es/table/interface';
 import CreateForm from './components/CreateForm';
@@ -10,86 +10,44 @@ import CreateForm from './components/CreateForm';
 import { TableListItem } from './data.d';
 import UpdateForm from './components/UpdateForm';
 
-// 生成 intl 对象
-// const enUSIntl = createIntl('en_US', enLocale);
-// 使用
-/**
- * 添加节点
- * @param fields
- */
-const handleAdd = async (fields: TableListItem) => {
-  const hide = message.loading('Creating');
-  try {
-    await addRule({ ...fields });
-    hide();
-    message.success('Created successfully!');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('Failed to add');
-    return false;
-  }
-};
-
-/**
- * 更新节点
- * @param fields
- */
-// const handleUpdate = async (fields: FormValueType) => {
-//   const hide = message.loading('Updating');
-//   try {
-//     await updateRule({
-//       name: fields.name,
-//       desc: fields.desc,
-//       key: fields.key,
-//     });
-//     hide();
-
-//     message.success('Updated Successfully!');
-//     return true;
-//   } catch (error) {
-//     hide();
-//     message.error('Failed to update');
-//     return false;
-//   }
-// };
-
-/**
- *  删除节点
- * @param selectedRows
- */
-const handleRemove = async () => null;
+enum EUser {
+  Admin = 'admin',
+  Manager = 'manager',
+  Operator = 'operator',
+}
 
 const TableList: React.FC<{}> = () => {
   const [sorter, setSorter] = useState<string>('');
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
-  const [dataSource] = useState<TableListItem[]>([
-    {
-      key: 1,
-      name: 'A Tran',
-      email: 'At@pems.com',
+  const [updateId, setUpdateId] = useState<number>();
+  const [dataSource, setDataSource] = useState<{ [key: number]: TableListItem }>({
+    0: {
+      key: 0,
+      name: 'Admin',
+      email: 'root.admin@ems.com',
       isActive: true,
-      createdAt: moment('1997/10/20', 'YYYY/MM/DD'),
-      phoneNo: '0987654321',
-      role: 'Admin',
-      updatedAt: moment('2020/08/20', 'YYYY/MM/DD'),
-      dob: moment('1997/10/20', 'YYYY/MM/DD'),
+      createdAt: moment('2020-10-10', 'YYYY-MM-DD'),
+      phoneNo: '09876543221',
+      role: EUser.Admin,
+      updatedAt: moment('2020-10-10', 'YYYY-MM-DD'),
+      dob: moment('1997-10-20', 'YYYY-MM-DD'),
     },
-  ]);
+  });
 
   const actionRef = useRef<ActionType>();
+
+  const handleRemove = async (key: number) => {
+    setDataSource((ds) => {
+      delete dataSource[key];
+      return { ...ds };
+    });
+  };
 
   const columns: ProColumns<TableListItem>[] = [
     {
       title: 'Name',
       dataIndex: 'name',
-      // rules: [
-      //   {
-      //     required: true,
-      //     message: '规则名称为必填项',
-      //   },
-      // ],
     },
     {
       title: 'Email',
@@ -124,29 +82,89 @@ const TableList: React.FC<{}> = () => {
     },
     {
       title: '',
-      dataIndex: 'option',
+      dataIndex: 'key',
       valueType: 'option',
       render: (_, record) => (
         <>
           <a
             onClick={() => {
+              setUpdateId(record.key);
               handleUpdateModalVisible(true);
-              setStepFormValues(record);
             }}
           >
             Update
           </a>
           <Divider type="vertical" />
-          <a>Remove</a>
+          <a
+            onClick={() => {
+              handleRemove(record.key);
+            }}
+          >
+            Remove
+          </a>
         </>
       ),
     },
   ];
 
+  const handleAdd = ({ name, email, phoneNo, role, dob }: TableListItem, key: number) => {
+    message.loading('Creating');
+    try {
+      const user = {
+        key,
+        name,
+        email,
+        isActive: true,
+        createdAt: moment(),
+        phoneNo,
+        role: role as EUser,
+        updatedAt: moment(),
+        dob: dob,
+      };
+
+      setDataSource((ds) => ({ ...ds, [key]: user }));
+
+      handleModalVisible(false);
+      message.success('Created successfully!');
+    } catch (error) {
+      console.error(error);
+      message.error('Failed to add');
+    }
+  };
+
+  const handleUpdate = (
+    { name, email, phoneNo, role, dob, isActive }: TableListItem,
+    key: number,
+  ) => {
+    message.loading('Updating');
+
+    try {
+      const user = {
+        key,
+        name,
+        email,
+        isActive,
+        createdAt: moment(),
+        phoneNo,
+        role: role as EUser,
+        updatedAt: moment(),
+        dob: dob,
+      };
+
+      setDataSource((ds) => ({ ...ds, [key]: user }));
+
+      message.success('Updated successfully!');
+      handleUpdateModalVisible(false);
+    } catch (error) {
+      console.error(error);
+      message.error('Failed to update');
+    }
+  };
+
   return (
     // <PageHeaderWrapper>
     <>
-      <IntlProvider value={enUSIntl}>
+      <IntlProvider value={{ intl: enUSIntl }}>
         <ProTable<TableListItem>
           headerTitle="User list"
           actionRef={actionRef}
@@ -170,7 +188,6 @@ const TableList: React.FC<{}> = () => {
                   <Menu
                     onClick={async (e) => {
                       if (e.key === 'remove') {
-                        await handleRemove(selectedRows);
                         action.reload();
                       }
                     }}
@@ -189,21 +206,28 @@ const TableList: React.FC<{}> = () => {
           tableAlertRender={({ selectedRowKeys }) => (
             <div>
               Selected <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> user&nbsp;&nbsp;
-              {/* <span>
-            Total number of service calls {selectedRows.reduce((pre, item) => pre + item.callNo, 0)} 万
-            </span> */}
             </div>
           )}
-          dataSource={dataSource}
+          dataSource={Object.values(dataSource)}
           columns={columns}
           rowSelection={{}}
         />
       </IntlProvider>
-      ;
-      <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
-        <ProTable<TableListItem, TableListItem>
+      <CreateForm
+        onSubmit={(fields) => {
+          handleAdd(fields, Object.values(dataSource).length);
+          if (actionRef.current) {
+            actionRef.current.reload();
+          }
+        }}
+        onCancel={() => {
+          handleModalVisible(false);
+        }}
+        modalVisible={createModalVisible}
+      />
+      {/* <ProTable<TableListItem, TableListItem>
           onSubmit={async (value) => {
-            const success = await handleAdd(value);
+            const success = await handleAdd(value, Object.values(dataSource).length);
             if (success) {
               handleModalVisible(false);
               if (actionRef.current) {
@@ -215,12 +239,21 @@ const TableList: React.FC<{}> = () => {
           type="form"
           columns={columns}
           rowSelection={{}}
+        /> */}
+      {/* </CreateForm> */}
+      {dataSource[updateId ?? -1] && (
+        <UpdateForm
+          initValue={dataSource[updateId ?? -1]}
+          onCancel={() => handleUpdateModalVisible(false)}
+          modalVisible={updateModalVisible}
+          onSubmit={(fields) => {
+            handleUpdate(fields, updateId ?? -1);
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+          }}
         />
-      </CreateForm>
-      <UpdateForm
-        onCancel={() => handleUpdateModalVisible(false)}
-        modalVisible={updateModalVisible}
-      />
+      )}
       {/* {stepFormValues && Object.keys(stepFormValues).length ? (
         <UpdateForm
           onSubmit={async (value) => {

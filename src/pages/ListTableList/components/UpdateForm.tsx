@@ -2,13 +2,14 @@
 import React from 'react';
 import { Modal, Form, Input, Button, Select, DatePicker, Switch } from 'antd';
 import moment from 'moment';
-
+import { TableListItem } from '../data';
 
 interface CreateFormProps {
+  initValue: TableListItem;
   modalVisible: boolean;
+  onSubmit: (fields: TableListItem) => void;
   onCancel: () => void;
 }
-
 
 const formItemLayout = {
   labelCol: {
@@ -43,14 +44,10 @@ const prefixSelector = (
 );
 
 const UpdateForm: React.FC<CreateFormProps> = (props) => {
-  const { modalVisible, onCancel } = props;
+  const { modalVisible, initValue, onSubmit, onCancel } = props;
+  console.log('🚀 ~ file: UpdateForm.tsx ~ line 48 ~ initValue', initValue);
 
   const [form] = Form.useForm();
-
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-  };
-
 
   return (
     <Modal
@@ -64,19 +61,20 @@ const UpdateForm: React.FC<CreateFormProps> = (props) => {
         {...formItemLayout}
         form={form}
         name="register"
-        onFinish={onFinish}
+        onFinish={onSubmit}
         initialValues={{
           prefix: '84',
-          fullName: 'A Tran',
-          email: 'At@pems.com',
-          phone: '0987654321',
-          role: 'admin',
-          dob: moment('1997/20/10', 'YYYY/DD/MM')
+          name: initValue.name,
+          email: initValue.email,
+          phoneNo: initValue.phoneNo,
+          role: initValue.role,
+          dob: initValue.dob,
+          isActive: initValue.isActive,
         }}
         scrollToFirstError
       >
         <Form.Item
-          name="fullName"
+          name="name"
           label="Full name"
           rules={[
             {
@@ -108,7 +106,6 @@ const UpdateForm: React.FC<CreateFormProps> = (props) => {
           name="dob"
           label="Date Of Birth"
           rules={[
-
             {
               required: true,
               message: 'Please input Date of birth!',
@@ -122,29 +119,25 @@ const UpdateForm: React.FC<CreateFormProps> = (props) => {
           name="role"
           label="Role"
           rules={[
-
             {
               required: true,
               message: 'Please select Role!',
             },
           ]}
         >
-          <Select >
+          <Select>
             <Select.Option value="admin">Admin</Select.Option>
             <Select.Option value="manager">Manager</Select.Option>
             <Select.Option value="operator">Operator</Select.Option>
           </Select>
         </Form.Item>
 
-        <Form.Item
-          name="isActive"
-          label="Status"
-        >
-          <Switch unCheckedChildren={'Inactive'} checkedChildren={'Active'} defaultChecked={true} />
+        <Form.Item name="isActive" label="Status" valuePropName="checked">
+          <Switch unCheckedChildren={'Inactive'} checkedChildren={'Active'} />
         </Form.Item>
 
         <Form.Item
-          name="phone"
+          name="phoneNo"
           label="Phone Number"
           rules={[
             {
@@ -164,10 +157,9 @@ const UpdateForm: React.FC<CreateFormProps> = (props) => {
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Save
-        </Button> &nbsp;
-        <Button onClick={() => onCancel()}>
-            Cancel
-        </Button>
+          </Button>{' '}
+          &nbsp;
+          <Button onClick={() => onCancel()}>Cancel</Button>
         </Form.Item>
       </Form>
     </Modal>

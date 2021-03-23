@@ -1,12 +1,12 @@
 import React from 'react';
 import { Modal, Form, Input, Button, Select, DatePicker } from 'antd';
-
+import { TableListItem } from '../data.d';
 
 interface CreateFormProps {
   modalVisible: boolean;
+  onSubmit: (fields: TableListItem) => void;
   onCancel: () => void;
 }
-
 
 const formItemLayout = {
   labelCol: {
@@ -41,14 +41,13 @@ const prefixSelector = (
 );
 
 const CreateForm: React.FC<CreateFormProps> = (props) => {
-  const { modalVisible, onCancel } = props;
+  const { modalVisible, onSubmit, onCancel } = props;
 
   const [form] = Form.useForm();
 
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-  };
-
+  // const onFinish = (values: any) => {
+  //   console.log('Received values of form: ', values);
+  // };
 
   return (
     <Modal
@@ -62,14 +61,14 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         {...formItemLayout}
         form={form}
         name="register"
-        onFinish={onFinish}
+        onFinish={onSubmit}
         initialValues={{
           prefix: '84',
         }}
         scrollToFirstError
       >
         <Form.Item
-          name="fullName"
+          name="name"
           label="Full name"
           rules={[
             {
@@ -101,7 +100,6 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
           name="dob"
           label="Date Of Birth"
           rules={[
-
             {
               required: true,
               message: 'Please input Date of birth!',
@@ -111,19 +109,17 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
           <DatePicker />
         </Form.Item>
 
-
         <Form.Item
           name="role"
           label="Role"
           rules={[
-
             {
               required: true,
               message: 'Please select role!',
             },
           ]}
         >
-          <Select >
+          <Select>
             <Select.Option value="admin">Admin</Select.Option>
             <Select.Option value="manager">Manager</Select.Option>
             <Select.Option value="operator">Operator</Select.Option>
@@ -155,7 +151,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
               message: 'Please confirm password!',
             },
             ({ getFieldValue }) => ({
-              validator(value) {
+              validator(_, value) {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
@@ -169,7 +165,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         </Form.Item>
 
         <Form.Item
-          name="phone"
+          name="phoneNo"
           label="Phone Number"
           rules={[
             {
@@ -189,10 +185,9 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Save
-        </Button> &nbsp;
-        <Button onClick={() => onCancel()}>
-            Cancel
-        </Button>
+          </Button>{' '}
+          &nbsp;
+          <Button onClick={() => onCancel()}>Cancel</Button>
         </Form.Item>
       </Form>
     </Modal>

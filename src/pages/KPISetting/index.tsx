@@ -1,6 +1,7 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Card, Row, Select, DatePicker, Button, Form, Table, Input } from 'antd';
-import React, { useState } from 'react';
+import moment from 'moment';
+import React, { useMemo, useState } from 'react';
 
 const dataSource = [
   {
@@ -37,6 +38,25 @@ const dataSource = [
 
 export default function KPISetting() {
   const [energy, setEnergy] = useState('Water');
+  const [time, setTime] = useState(moment('2021/01/01', 'YYYY/MM/DD'));
+
+  const array = [0, 1, 2, 3, 4, 5, 6, 7];
+
+  const getColumn = useMemo(
+    () => ({
+      title: 'Plan (Liter)',
+      key: 'name',
+      children: array.map((_, i) => ({
+        title: moment(time).add(i, 'days').format('YYYY/MM/DD'),
+        dataIndex: '30',
+        key: i,
+        render: () => {
+          return <Input type="number" />;
+        },
+      })),
+    }),
+    [time, array],
+  );
   return (
     // <PageHeaderWrapper>
     <Card style={{ width: '100%' }}>
@@ -58,7 +78,14 @@ export default function KPISetting() {
             </Select>
           </Form.Item>
           <Form.Item label="Time">
-            <DatePicker style={{ width: '100%' }} format={'MM/DD/YYYY'} />
+            <DatePicker
+              value={time}
+              onChange={(value) => {
+                setTime(value ?? moment());
+              }}
+              style={{ width: '100%' }}
+              format={'MM/DD/YYYY'}
+            />
           </Form.Item>
         </Form>
         <Button type="primary">Save Setting</Button>
@@ -85,68 +112,7 @@ export default function KPISetting() {
               return <Input type="number" />;
             },
           },
-          {
-            title: 'Plan (Liter)',
-            key: 'name',
-            children: [
-              {
-                title: '2020-11-30',
-                dataIndex: '30',
-                key: 'name',
-                render: () => {
-                  return <Input type="number" />;
-                },
-              },
-              {
-                title: '2020-12-1',
-                dataIndex: '30',
-                key: 'name',
-                render: () => {
-                  return <Input type="number" />;
-                },
-              },
-              {
-                title: '2020-12-2',
-                dataIndex: '30',
-                key: 'name',
-                render: () => {
-                  return <Input type="number" />;
-                },
-              },
-              {
-                title: '2020-12-3',
-                dataIndex: '30',
-                key: 'name',
-                render: () => {
-                  return <Input type="number" />;
-                },
-              },
-              {
-                title: '2020-12-4',
-                dataIndex: '30',
-                key: 'name',
-                render: () => {
-                  return <Input type="number" />;
-                },
-              },
-              {
-                title: '2020-12-5',
-                dataIndex: '30',
-                key: 'name',
-                render: () => {
-                  return <Input type="number" />;
-                },
-              },
-              {
-                title: '2020-12-6',
-                dataIndex: '30',
-                key: 'name',
-                render: () => {
-                  return <Input type="number" />;
-                },
-              },
-            ],
-          },
+          getColumn,
         ]}
       />
     </Card>

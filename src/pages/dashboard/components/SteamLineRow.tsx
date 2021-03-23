@@ -18,21 +18,28 @@ const topColResponsiveProps = {
 
 const dataSource1 = [
   {
-    title: 'RO WT1',
+    title: 'Boiler 1',
     imgSrc: '/line-area/RO-Room.jpg',
     total: '5.9',
     actual: 95,
     expect: 23.3,
   },
   {
-    title: 'RO WT2',
+    title: 'Boiler 2',
     imgSrc: '/line-area/RO-Room.jpg',
     total: '5.9',
     actual: 95,
     expect: 23.3,
   },
   {
-    title: 'Line T (AQUA 600 Sidel)',
+    title: 'Boiler 3',
+    imgSrc: '/line-area/RO-Room.jpg',
+    total: '5.9',
+    actual: 95,
+    expect: 23.3,
+  },
+  {
+    title: 'Line T',
     imgSrc: '/line-area/Aqua-line.jpg',
     total: '5.9',
     actual: 95,

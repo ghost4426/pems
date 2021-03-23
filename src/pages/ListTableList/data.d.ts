@@ -1,5 +1,10 @@
-import { Moment } from "moment";
+import { Moment } from 'moment';
 
+enum EUser {
+  Admin = 'admin',
+  Manager = 'manager',
+  Operator = 'operator',
+}
 export interface TableListItem {
   key: number;
   disabled?: boolean;
@@ -7,7 +12,7 @@ export interface TableListItem {
   email: string;
   phoneNo: string;
   isActive: boolean;
-  role: 'Admin'| 'User';
+  role: EUser;
   dob: Moment;
   updatedAt: Moment;
   createdAt: Moment;
