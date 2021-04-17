@@ -111,7 +111,13 @@ function Analysis(props: any) {
                           <Typography.Title level={4}>Pepsico Dong Nai Plant:</Typography.Title>
                         </Col>
                         <Col span={24} style={{ textAlign: 'center' }}>
-                          {`${energyType === 'elec' ? 'Electricity' : 'Water'} KPI`}
+                          {`${
+                            energyType === 'elec'
+                              ? 'Electricity'
+                              : energyType === 'steam'
+                              ? 'Steam'
+                              : 'Water'
+                          } KPI`}
                         </Col>
                         <Col span={24} style={{ textAlign: 'center' }}>
                           {' '}

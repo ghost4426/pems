@@ -1,4 +1,12 @@
-import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
+import {
+  PlusOutlined,
+  HomeOutlined,
+  ContactsOutlined,
+  ClusterOutlined,
+  CalendarOutlined,
+  PhoneOutlined,
+  MailOutlined,
+} from '@ant-design/icons';
 import { Card, Col, Divider, Input, Row, Tag } from 'antd';
 import React, { Component, useState, useRef } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
@@ -76,7 +84,7 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
 
   return (
     <div className={styles.tags}>
-      <div className={styles.tagsTitle}>Tag</div>
+      <div className={styles.tagsTitle}>Role</div>
       {(tags || []).concat(newTags).map((item) => (
         <Tag key={item.key}>{item.label}</Tag>
       ))}
@@ -91,11 +99,6 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
           onBlur={handleInputConfirm}
           onPressEnter={handleInputConfirm}
         />
-      )}
-      {!inputVisible && (
-        <Tag onClick={showInput} style={{ borderStyle: 'dashed' }}>
-          <PlusOutlined />
-        </Tag>
       )}
     </div>
   );
@@ -161,37 +164,28 @@ class Center extends Component<CenterProps, CenterState> {
   renderUserInfo = (currentUser: Partial<CurrentUser>) => (
     <div className={styles.detail}>
       <p>
-        <ContactsOutlined
+        <CalendarOutlined
           style={{
             marginRight: 8,
           }}
         />
-        {currentUser.title}
+        {'20/10/1997'}
       </p>
       <p>
-        <ClusterOutlined
+        <PhoneOutlined
           style={{
             marginRight: 8,
           }}
         />
-        {currentUser.group}
+        {'09876543221'}
       </p>
       <p>
-        <HomeOutlined
+        <MailOutlined
           style={{
             marginRight: 8,
           }}
         />
-        {(currentUser.geographic || { province: { label: '' } }).province.label}
-        {
-          (
-            currentUser.geographic || {
-              city: {
-                label: '',
-              },
-            }
-          ).city.label
-        }
+        {'root.admin@ems.com'}
       </p>
     </div>
   );
@@ -206,6 +200,7 @@ class Center extends Component<CenterProps, CenterState> {
       signature: '',
       title: '',
       group: '',
+      tags: [{ key: 'admin', label: 'Admin' }],
     };
     return (
       <GridContent>
